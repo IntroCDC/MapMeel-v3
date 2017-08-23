@@ -1,0 +1,25 @@
+name: MapMeel
+version: 3.0.10.01.2017
+author: Intro
+main: br.com.introcdc.mapmeelv3.MapMeelMain
+depend: ['WorldEdit', 'Citizens']
+
+commands:
+    setcargo:
+    invsee:
+    bloqueador:
+    preferencias:
+    admin:
+    vis:
+    invis:
+    checkpoint:
+    top:
+    resetall:
+    audio:
+    lobby:
+    warp:
+    worldteleport:
+    teatro:
+    overwatch:
+    searchblock:
+    meel:
