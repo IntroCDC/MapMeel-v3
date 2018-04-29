@@ -14,7 +14,7 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class CommandSearchBlock implements CommandExecutor {
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             if (Profile.getProfile(sender.getName()).getCargo().isBefore(Cargo.ADMIN)) {
                 sender.sendMessage(Strings.prefix + "§cVocê não tem permissão para isto!");
@@ -24,12 +24,12 @@ public class CommandSearchBlock implements CommandExecutor {
         if (!(sender instanceof Player)) {
             return false;
         }
-        final Player p = (Player) sender;
+        Player p = (Player) sender;
         if (args.length != 2) {
             sender.sendMessage(Strings.prefix + "§cUso correto: /searchblock [raio] [bloco]");
             return false;
         }
-        for (final Block b : Utils.nearBlocks(p.getLocation(), Integer.parseInt(args[0]))) {
+        for (Block b : Utils.nearBlocks(p.getLocation(), Integer.parseInt(args[0]))) {
             if (b.getTypeId() == Integer.parseInt(args[1])) {
                 sender.sendMessage(Strings.prefix + "§fBloco localizado! X: " + b.getLocation().getX() + " - Y: " + b.getLocation().getY() + " - Z: " + b.getLocation().getZ());
             }

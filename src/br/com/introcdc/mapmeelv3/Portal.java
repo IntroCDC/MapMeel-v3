@@ -38,13 +38,13 @@ public class Portal {
         return Portal.portais;
     }
 
-    private final Location destino;
+    private Location destino;
     private Hologram hologram;
-    private final Location location;
-    private final String name;
-    private final Nivel nivel;
+    private Location location;
+    private String name;
+    private Nivel nivel;
 
-    public Portal(final String name, final Location destino, final Location location, final Nivel nivel) throws MaxChangedBlocksException, DataException, IOException {
+    public Portal(String name, Location destino, Location location, Nivel nivel) throws MaxChangedBlocksException, DataException, IOException {
         this.name = name;
         this.destino = destino;
         this.location = location;
@@ -72,11 +72,11 @@ public class Portal {
     }
 
     public void loadPortal() throws DataException, IOException, MaxChangedBlocksException {
-        final EditSession es = new EditSession(new BukkitWorld(this.location.getWorld()), 999999999);
-        final CuboidClipboard cc = CuboidClipboard.loadSchematic(new File("portalBase.schematic"));
-        final com.sk89q.worldedit.Vector origin = new com.sk89q.worldedit.Vector(this.location.getX(), this.location.getY(), this.location.getZ());
+        EditSession es = new EditSession(new BukkitWorld(this.location.getWorld()), 999999999);
+        CuboidClipboard cc = CuboidClipboard.loadSchematic(new File("portalBase.schematic"));
+        com.sk89q.worldedit.Vector origin = new com.sk89q.worldedit.Vector(this.location.getX(), this.location.getY(), this.location.getZ());
         cc.paste(es, origin, true);
-        for (final Warp warp : Warp.values()) {
+        for (Warp warp : Warp.values()) {
             if (warp.getLocation().equals(this.getDestino())) {
                 new BukkitRunnable() {
                     @Override
@@ -96,7 +96,7 @@ public class Portal {
         }
     }
 
-    public void teleport(final Player player) {
+    public void teleport(Player player) {
         if (player.getGameMode().equals(GameMode.SPECTATOR)) {
             return;
         }
@@ -136,7 +136,7 @@ public class Portal {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        final Location dest = Portal.this.getDestino().clone();
+                        Location dest = Portal.this.getDestino().clone();
                         dest.setY(dest.clone().getY() + 100);
                         dest.setDirection(player.getLocation().getDirection());
                         if (Utils.isMeelOn()) {
@@ -146,13 +146,13 @@ public class Portal {
                         }
                         player.teleport(dest);
                         Warp warp = null;
-                        for (final Warp w : Warp.values()) {
+                        for (Warp w : Warp.values()) {
                             if (w.getLocation().equals(Portal.this.getDestino())) {
                                 warp = w;
                             }
                         }
                         if (warp != null) {
-                            final Warp w = warp;
+                            Warp w = warp;
                             Profile.getProfile(player.getName()).setLocation(warp);
                             CheckpointManager.resetCurrentCheckPoint(player);
                             if (Profile.getProfile(player.getName()).isAudioFundoOn()) {

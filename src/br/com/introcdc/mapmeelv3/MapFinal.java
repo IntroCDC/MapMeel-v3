@@ -13,15 +13,15 @@ import org.bukkit.util.Vector;
 import br.com.introcdc.mapmeelv3.listeners.MoveEvent;
 import br.com.introcdc.mapmeelv3.variables.Strings;
 
-public class MapFinal {
+public class Map{
 
-    public static final Random random = new Random();
+    public static Random random = new Random();
 
     public static boolean started = false;
 
     private static int timer = 0;
 
-    public static void event1(final Player p) {
+    public static void event1(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §aEasterEgg-2");
         p.teleport(HistoriaMapMeelv3.meio);
         HistoriaMapMeelv3.loadConstruction("teatroFNegra");
@@ -38,7 +38,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event10(final Player p) {
+    public static void event10(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §a2A");
         p.teleport(Warp.L_2A.getLocation());
         MapFinal.timer = 0;
@@ -54,7 +54,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event11(final Player p) {
+    public static void event11(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §a2B");
         p.teleport(Warp.L_2B.getLocation());
         MapFinal.timer = 0;
@@ -70,8 +70,8 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event12(final Player p) {
-        final Location special = new Location(Bukkit.getWorld("world"), 8000, 100, 8000);
+    public static void event12(Player p) {
+        Location special = new Location(Bukkit.getWorld("world"), 8000, 100, 8000);
         p.teleport(special);
         MapFinal.timer = 0;
         new BukkitRunnable() {
@@ -88,7 +88,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event13(final Player p) {
+    public static void event13(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §aEasterEgg-1");
         p.teleport(Warp.EASTEREGG_1.getLocation());
         MapFinal.timer = 0;
@@ -104,7 +104,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event14(final Player p) {
+    public static void event14(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §aEasterEgg-2");
         p.teleport(Warp.EASTEREGG_2.getLocation());
         MapFinal.timer = 0;
@@ -120,8 +120,8 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event15(final Player p) {
-        final Location special = new Location(Bukkit.getWorld("world"), 8000, 100, 8000);
+    public static void event15(Player p) {
+        Location special = new Location(Bukkit.getWorld("world"), 8000, 100, 8000);
         p.teleport(special);
         MapFinal.timer = 0;
         new BukkitRunnable() {
@@ -132,7 +132,7 @@ public class MapFinal {
                     this.cancel();
                     MapFinal.started = false;
                     Utils.playSound(p, Audio.WIN);
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "warp PlataformaFinal " + p.getName());
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "warp Plataforma" + p.getName());
                     Utils.sendTitle(p, "§2§lParabéns!", "§oVocê finalizou o §5§oMapMeel v3§f§o com sucesso!", 20, 100, 20);
                     p.sendMessage(Strings.prefix + "§2§lParabéns! §f§oVocê finalizou o §5§oMapMeel v3§f§o com sucesso!");
                     p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 50000, 1);
@@ -151,7 +151,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event2(final Player p) {
+    public static void event2(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §a2A");
         p.teleport(Warp.L_2A.getLocation());
         MapFinal.timer = 0;
@@ -167,8 +167,8 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event3(final Player p) {
-        final Location special = new Location(Bukkit.getWorld("world"), 8000, 100, 8000);
+    public static void event3(Player p) {
+        Location special = new Location(Bukkit.getWorld("world"), 8000, 100, 8000);
         p.teleport(special);
         MapFinal.timer = 0;
         new BukkitRunnable() {
@@ -185,7 +185,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event4(final Player p) {
+    public static void event4(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §aLobby-1");
         p.teleport(Warp.LOBBY_1.getLocation());
         MapFinal.timer = 0;
@@ -201,7 +201,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event5(final Player p) {
+    public static void event5(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §aLobby-2");
         p.teleport(Warp.LOBBY_2.getLocation());
         MapFinal.timer = 0;
@@ -217,7 +217,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event6(final Player p) {
+    public static void event6(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §a1A");
         p.teleport(Warp.L_1A.getLocation());
         MapFinal.timer = 0;
@@ -233,7 +233,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event7(final Player p) {
+    public static void event7(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §a1B");
         p.teleport(Warp.L_1B.getLocation());
         MapFinal.timer = 0;
@@ -249,7 +249,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event8(final Player p) {
+    public static void event8(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §a1C");
         p.teleport(Warp.L_1C.getLocation());
         MapFinal.timer = 0;
@@ -265,7 +265,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void event9(final Player p) {
+    public static void event9(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §a1D");
         p.teleport(Warp.L_1D.getLocation());
         MapFinal.timer = 0;
@@ -281,7 +281,7 @@ public class MapFinal {
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
     }
 
-    public static void start(final Player p) {
+    public static void start(Player p) {
         if (Utils.isMeelOn()) {
             if (Utils.getMeel().getName().equalsIgnoreCase(p.getName())) {
                 MoveEvent.teleporting = true;

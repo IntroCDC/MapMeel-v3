@@ -1,0 +1,24 @@
+name: MapMeel
+version: 10.01.2017.3.0
+author: IntroCDC
+main: br.com.introcdc.mapmeelv3.MapMeelMain
+
+commands:
+    setcargo:
+    invsee:
+    bloqueador:
+    preferencias:
+    admin:
+    vis:
+    invis:
+    checkpoint:
+    top:
+    audio:
+    warp:
+    worldteleport:
+    lobby:
+    overwatch:
+    teatro:
+    meel:
+    resetall:
+    searchblock:

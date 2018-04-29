@@ -27,12 +27,12 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class MoveEvent implements Listener {
 
     public static boolean isPlaying = false;
-    public static final ArrayList<UUID> spongeInvenciliby = new ArrayList<>();
+    public static ArrayList<UUID> spongeInvenciliby = new ArrayList<>();
 
     public static boolean teleporting = false;
 
     @EventHandler
-    public void onMove(final PlayerMoveEvent event) {
+    public void onMove(PlayerMoveEvent event) {
         if (event.getPlayer().getGameMode().equals(GameMode.SPECTATOR)) {
             if (event.getTo().getY() < 0.0) {
                 if (Utils.isMeelOn()) {
@@ -51,7 +51,7 @@ public class MoveEvent implements Listener {
                 Utils.errou(event.getPlayer());
             }
         }
-        for (final String ss : Portal.getPortais().keySet()) {
+        for (String ss : Portal.getPortais().keySet()) {
             if (Portal.getPortais().get(ss).getLocation().getWorld().equals(event.getPlayer().getWorld())) {
                 if (Portal.getPortais().get(ss).getLocation().clone().add(0, 2, 0).distance(event.getPlayer().getLocation()) <= 1) {
                     if (!Profile.getProfile(event.getPlayer().getName()).getLocation().getName().equalsIgnoreCase(Warp.FINAL.getName())) {
@@ -72,34 +72,29 @@ public class MoveEvent implements Listener {
                 }
             }
         }
-        for (final String ss : Checkpoint.checkpoints.keySet()) {
+        for (String ss : Checkpoint.checkpoints.keySet()) {
             if (Checkpoint.checkpoints.get(ss).getLocation().getWorld().equals(event.getPlayer().getWorld())) {
                 if (Checkpoint.checkpoints.get(ss).getLocation().clone().add(0, 1, 0).distance(event.getPlayer().getLocation()) <= 1) {
                     Checkpoint.checkpoints.get(ss).checkpoint(event.getPlayer());
                 }
             }
         }
-        if (event.getTo().getBlock().getType().equals(Material.ENDER_PORTAL_FRAME) || event.getTo().getBlock().getType().equals(Material.ENDER_PORTAL) && event.getTo().getWorld().getName().equalsIgnoreCase("world_the_end")) {
+        if (event.getTo().getBlock().getType().equals(Material.ENDER_PORTAL_FRAME) || event.getTo().getBlock().getType().equals(Material.ENDER_PORTAL) || event.getTo().clone().add(0, -1,0).getBlock().getType().equals(Material.ENDER_PORTAL_FRAME) || event.getTo().clone().add(0, -1,0).getBlock().getType().equals(Material.ENDER_PORTAL) && event.getTo().getWorld().getName().equalsIgnoreCase("world_the_end")) {
             if (MoveEvent.isPlaying) {
                 return;
             }
             MoveEvent.isPlaying = true;
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    if (Utils.isMeelOn()) {
-                        if (Utils.getMeel().getName().equalsIgnoreCase(event.getPlayer().getName())) {
-                            for (final Player player : Bukkit.getOnlinePlayers()) {
-                                Utils.playSound(player, Audio.BUILD_A_HOME);
-                            }
-                        } else {
-                            Utils.playSound(event.getPlayer(), Audio.BUILD_A_HOME);
-                        }
-                    } else {
-                        Utils.playSound(event.getPlayer(), Audio.BUILD_A_HOME);
+            if (Utils.isMeelOn()) {
+                if (Utils.getMeel().getName().equalsIgnoreCase(event.getPlayer().getName())) {
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        Utils.playSound(player, Audio.BUILD_A_HOME);
                     }
+                } else {
+                    Utils.playSound(event.getPlayer(), Audio.BUILD_A_HOME);
                 }
-            }.runTaskLater(MapMeelMain.getPlugin(), 25 * 20);
+            } else {
+                Utils.playSound(event.getPlayer(), Audio.BUILD_A_HOME);
+            }
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -118,15 +113,15 @@ public class MoveEvent implements Listener {
         }
         if (InteractEvent.Lava.contains(event.getPlayer().getUniqueId())) {
             if (event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(0, -1, 0)).getType().equals(Material.LAVA) || event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(0, -1, 0)).getType().equals(Material.STATIONARY_LAVA)) {
-                final Material mat1 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(0, -1, 0)).getType();
-                final Material mat2 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(1, -1, 0)).getType();
-                final Material mat3 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(0, -1, -1)).getType();
-                final Material mat4 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(0, -1, 1)).getType();
-                final Material mat5 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(-1, -1, 0)).getType();
-                final Material mat6 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(1, -1, 1)).getType();
-                final Material mat7 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(-1, -1, -1)).getType();
-                final Material mat8 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(-1, -1, 1)).getType();
-                final Material mat9 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(1, -1, -1)).getType();
+                Material mat1 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(0, -1, 0)).getType();
+                Material mat2 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(1, -1, 0)).getType();
+                Material mat3 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(0, -1, -1)).getType();
+                Material mat4 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(0, -1, 1)).getType();
+                Material mat5 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(-1, -1, 0)).getType();
+                Material mat6 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(1, -1, 1)).getType();
+                Material mat7 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(-1, -1, -1)).getType();
+                Material mat8 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(-1, -1, 1)).getType();
+                Material mat9 = event.getPlayer().getWorld().getBlockAt(event.getTo().clone().add(1, -1, -1)).getType();
                 event.getPlayer().sendBlockChange(event.getTo().clone().add(0, -1, 0), Material.GLASS, (byte) 0);
                 event.getPlayer().sendBlockChange(event.getTo().clone().add(1, -1, 0), Material.GLASS, (byte) 0);
                 event.getPlayer().sendBlockChange(event.getTo().clone().add(0, -1, -1), Material.GLASS, (byte) 0);
@@ -155,7 +150,7 @@ public class MoveEvent implements Listener {
     }
 
     @EventHandler
-    public void onTeleport(final PlayerTeleportEvent event) {
+    public void onTeleport(PlayerTeleportEvent event) {
         if (Utils.isMeelOn() && !event.getPlayer().getLocation().getBlock().getType().toString().toUpperCase().contains("PORTAL")) {
             if (Utils.getMeel().getName().equalsIgnoreCase(event.getPlayer().getName())) {
                 if (!MoveEvent.teleporting) {

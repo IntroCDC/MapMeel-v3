@@ -15,7 +15,7 @@ public class Updater {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (final Player player : Bukkit.getOnlinePlayers()) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
                     Profile.getProfile(player.getName()).addTime();
                     String header = "";
                     header += "\n" + ScoreManager.randomString() + "\n\n§fWarp atual: §a" + Profile.getProfile(player.getName()).getLocation().getName();
@@ -88,7 +88,7 @@ public class Updater {
                     Utils.sendTablist(player, header, footer);
                     ScoreManager.scoreboard(player);
                     if (Updater.Invis.contains(player.getUniqueId())) {
-                        for (final Player players : Bukkit.getOnlinePlayers()) {
+                        for (Player players : Bukkit.getOnlinePlayers()) {
                             if (Profile.getProfile(players.getName()).getCargo().equals(Cargo.ADMIN)) {
                                 if (!players.canSee(player)) {
                                     players.showPlayer(player);
@@ -100,7 +100,7 @@ public class Updater {
                             }
                         }
                     } else {
-                        for (final Player players : Bukkit.getOnlinePlayers()) {
+                        for (Player players : Bukkit.getOnlinePlayers()) {
                             if (!players.canSee(player)) {
                                 players.showPlayer(player);
                             }
@@ -115,7 +115,7 @@ public class Updater {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (final Player player : Bukkit.getOnlinePlayers()) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
                     if (Profile.getProfile(player.getName()).isAudioFundoOn() && Profile.getProfile(player.getName()).getLocation().getFundo() != null) {
                         Utils.playSound(player, Audio.PARAR);
                         new BukkitRunnable() {

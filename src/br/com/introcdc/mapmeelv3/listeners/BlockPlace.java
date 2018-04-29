@@ -16,7 +16,7 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class BlockPlace implements Listener {
 
     @EventHandler
-    public void onBreak(final BlockBreakEvent event) {
+    public void onBreak(BlockBreakEvent event) {
         if (!event.getPlayer().getName().equalsIgnoreCase("Introo")) {
             if (Utils.isMeelOn()) {
                 event.getPlayer().sendMessage(Strings.prefix + "§cA construção não é permitida com a Meel online!");
@@ -34,7 +34,7 @@ public class BlockPlace implements Listener {
     }
 
     @EventHandler
-    public void onEmpty(final PlayerBucketEmptyEvent event) {
+    public void onEmpty(PlayerBucketEmptyEvent event) {
         if (!event.getPlayer().getName().equalsIgnoreCase("Introo")) {
             if (Utils.isMeelOn()) {
                 event.getPlayer().sendMessage(Strings.prefix + "§cA construção não é permitida com a Meel online!");
@@ -52,7 +52,7 @@ public class BlockPlace implements Listener {
     }
 
     @EventHandler
-    public void onFill(final PlayerBucketFillEvent event) {
+    public void onFill(PlayerBucketFillEvent event) {
         if (!event.getPlayer().getName().equalsIgnoreCase("Introo")) {
             if (Utils.isMeelOn()) {
                 event.getPlayer().sendMessage(Strings.prefix + "§cA construção não é permitida com a Meel online!");
@@ -70,7 +70,7 @@ public class BlockPlace implements Listener {
     }
 
     @EventHandler
-    public void onPlace(final BlockPlaceEvent event) {
+    public void onPlace(BlockPlaceEvent event) {
         if (!event.getPlayer().getName().equalsIgnoreCase("Introo")) {
             if (Utils.isMeelOn()) {
                 event.getPlayer().sendMessage(Strings.prefix + "§cA construção não é permitida com a Meel online!");

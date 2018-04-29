@@ -69,7 +69,7 @@ public class HistoriaMapMeelv3 {
 
     public static boolean start = false;
 
-    public static void loadBots(final boolean Continue) {
+    public static void loadBots(boolean Continue) {
         if (HistoriaMapMeelv3.autoStarted) {
             return;
         }
@@ -362,11 +362,11 @@ public class HistoriaMapMeelv3 {
 
     }
 
-    public static void loadConstruction(final String name) {
+    public static void loadConstruction(String name) {
         try {
-            final EditSession es = new EditSession(new BukkitWorld(Bukkit.getWorld("world")), 999999999);
-            final CuboidClipboard cc = CuboidClipboard.loadSchematic(new File("plugins/WorldEdit/schematics/" + name + ".schematic"));
-            final com.sk89q.worldedit.Vector origin = new com.sk89q.worldedit.Vector(4999, 36, 4878);
+            EditSession es = new EditSession(new BukkitWorld(Bukkit.getWorld("world")), 999999999);
+            CuboidClipboard cc = CuboidClipboard.loadSchematic(new File("plugins/WorldEdit/schematics/" + name + ".schematic"));
+            com.sk89q.worldedit.Vector origin = new com.sk89q.worldedit.Vector(4999, 36, 4878);
             cc.paste(es, origin, false);
         } catch (DataException | IOException | MaxChangedBlocksException e) {
             e.printStackTrace();
@@ -527,7 +527,7 @@ public class HistoriaMapMeelv3 {
 
         HistoriaMapMeelv3.reloadAllSkins();
 
-        for (final Player p : Bukkit.getOnlinePlayers()) {
+        for (Player p : Bukkit.getOnlinePlayers()) {
             Utils.playSound(p, Audio.HISTORIA);
         }
 
@@ -1222,7 +1222,7 @@ public class HistoriaMapMeelv3 {
 
     }
 
-    public static void startHistoriaTeste(final boolean Continue) {
+    public static void startHistoriaTeste(boolean Continue) {
         HistoriaMapMeelv3.toggleLightsAudience(false);
         HistoriaMapMeelv3.toggleLightsStage(false, "tudo");
         HistoriaMapMeelv3.loadConstruction("teatroIntro");
@@ -1241,7 +1241,7 @@ public class HistoriaMapMeelv3 {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (final Player player : Bukkit.getOnlinePlayers()) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
                     Utils.playSound(player, Audio.TESTE);
                 }
 
@@ -1343,13 +1343,13 @@ public class HistoriaMapMeelv3 {
         }.runTaskLaterAsynchronously(MapMeelMain.getPlugin(), 20);
     }
 
-    public static void toggleLightsAudience(final boolean aberto) {
-        final Material before = aberto ? Material.WOOD : Material.SEA_LANTERN;
-        final Material after = aberto ? Material.SEA_LANTERN : Material.WOOD;
+    public static void toggleLightsAudience(boolean aberto) {
+        Material before = aberto ? Material.WOOD : Material.SEA_LANTERN;
+        Material after = aberto ? Material.SEA_LANTERN : Material.WOOD;
         for (int x = 4975; x <= 5028; x++) {
             for (int y = 36; y <= 55; y++) {
                 for (int z = 4893; z <= 4920; z++) {
-                    final Block block = Bukkit.getWorld("world").getBlockAt(x, y, z);
+                    Block block = Bukkit.getWorld("world").getBlockAt(x, y, z);
                     if (block.getType().equals(before)) {
                         block.setType(after);
                     }
@@ -1358,7 +1358,7 @@ public class HistoriaMapMeelv3 {
         }
     }
 
-    public static void toggleLightsStage(final boolean aberto, final String Type) {
+    public static void toggleLightsStage(boolean aberto, String Type) {
         new BukkitRunnable() {
             String type = Type;
 

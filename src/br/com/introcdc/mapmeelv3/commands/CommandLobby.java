@@ -19,12 +19,12 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class CommandLobby implements CommandExecutor {
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
             return false;
         }
-        final Player player = (Player) sender;
-        final Profile profile = Profile.getProfile(sender.getName());
+        Player player = (Player) sender;
+        Profile profile = Profile.getProfile(sender.getName());
         if (Utils.isMeelOn()) {
             if (Utils.getMeel().getName().equalsIgnoreCase(sender.getName())) {
                 MoveEvent.teleporting = true;
@@ -35,7 +35,7 @@ public class CommandLobby implements CommandExecutor {
             return false;
         }
         if (profile.getLocation().getName().toLowerCase().contains("1") && !profile.getLocation().getName().toLowerCase().contains("lobby") && !profile.getLocation().getName().toLowerCase().contains("easteregg")) {
-            final Warp warp = Warp.LOBBY_1;
+            Warp warp = Warp.LOBBY_1;
             player.teleport(warp.getLocation());
             profile.setLocation(warp);
             CheckpointManager.resetCurrentCheckPoint(player);
@@ -50,7 +50,7 @@ public class CommandLobby implements CommandExecutor {
                 }.runTaskLater(MapMeelMain.getPlugin(), 20);
             }
         } else if (profile.getLocation().getName().toLowerCase().contains("2") && !profile.getLocation().getName().toLowerCase().contains("lobby") && !profile.getLocation().getName().toLowerCase().contains("easteregg")) {
-            final Warp warp = Warp.LOBBY_2;
+            Warp warp = Warp.LOBBY_2;
             player.teleport(warp.getLocation());
             profile.setLocation(warp);
             CheckpointManager.resetCurrentCheckPoint(player);
@@ -65,7 +65,7 @@ public class CommandLobby implements CommandExecutor {
                 }.runTaskLater(MapMeelMain.getPlugin(), 20);
             }
         } else if (profile.getLocation().getName().toLowerCase().contains("3") && !profile.getLocation().getName().toLowerCase().contains("lobby") && !profile.getLocation().getName().toLowerCase().contains("easteregg")) {
-            final Warp warp = Warp.LOBBY_3;
+            Warp warp = Warp.LOBBY_3;
             player.teleport(warp.getLocation());
             profile.setLocation(warp);
             CheckpointManager.resetCurrentCheckPoint(player);
@@ -80,7 +80,7 @@ public class CommandLobby implements CommandExecutor {
                 }.runTaskLater(MapMeelMain.getPlugin(), 20);
             }
         } else if (profile.getLocation().getName().toLowerCase().contains("4") && !profile.getLocation().getName().toLowerCase().contains("lobby") && !profile.getLocation().getName().toLowerCase().contains("easteregg")) {
-            final Warp warp = Warp.LOBBY_4;
+            Warp warp = Warp.LOBBY_4;
             player.teleport(warp.getLocation());
             profile.setLocation(warp);
             CheckpointManager.resetCurrentCheckPoint(player);

@@ -26,10 +26,10 @@ public class Checkpoint {
     public static HashMap<String, Checkpoint> checkpoints = new HashMap<>();
 
     private Hologram hologram;
-    private final Location location;
-    private final String name;
+    private Location location;
+    private String name;
 
-    public Checkpoint(final String name, final Location location) throws MaxChangedBlocksException, DataException, IOException {
+    public Checkpoint(String name, Location location) throws MaxChangedBlocksException, DataException, IOException {
         this.name = name;
         this.location = location;
         if (!Checkpoint.checkpoints.containsKey(name)) {
@@ -38,7 +38,7 @@ public class Checkpoint {
         this.loadCheckpoint();
     }
 
-    public void checkpoint(final Player player) {
+    public void checkpoint(Player player) {
         if (CheckpointManager.getCurrentCheckpoint(player) != null && CheckpointManager.getCurrentCheckpoint(player).equals(this.getLocation())) {
             player.sendBlockChange(this.getLocation(), Material.STAINED_GLASS, (byte) 14);
             return;
@@ -72,9 +72,9 @@ public class Checkpoint {
     }
 
     public void loadCheckpoint() throws DataException, IOException, MaxChangedBlocksException {
-        final EditSession es = new EditSession(new BukkitWorld(this.location.getWorld()), 999999999);
-        final CuboidClipboard cc = CuboidClipboard.loadSchematic(new File("checkpoint.schematic"));
-        final com.sk89q.worldedit.Vector origin = new com.sk89q.worldedit.Vector(this.location.getX(), this.location.getY(), this.location.getZ());
+        EditSession es = new EditSession(new BukkitWorld(this.location.getWorld()), 999999999);
+        CuboidClipboard cc = CuboidClipboard.loadSchematic(new File("checkpoint.schematic"));
+        com.sk89q.worldedit.Vector origin = new com.sk89q.worldedit.Vector(this.location.getX(), this.location.getY(), this.location.getZ());
         cc.paste(es, origin, true);
         new BukkitRunnable() {
             @Override

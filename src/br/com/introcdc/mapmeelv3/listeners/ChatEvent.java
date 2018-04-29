@@ -13,7 +13,7 @@ import br.com.introcdc.mapmeelv3.Utils;
 public class ChatEvent implements Listener {
 
     @EventHandler
-    public void onChat(final AsyncPlayerChatEvent event) {
+    public void onChat(AsyncPlayerChatEvent event) {
         if (event.getMessage().equalsIgnoreCase("!STARTFINALEVENT!") && Profile.getProfile(event.getPlayer().getName()).getCargo().isOp()) {
             event.setCancelled(true);
             new BukkitRunnable() {

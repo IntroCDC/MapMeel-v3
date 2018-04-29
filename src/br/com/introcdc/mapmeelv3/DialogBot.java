@@ -39,7 +39,7 @@ public enum DialogBot {
 
     private String patch;
 
-    DialogBot(final String patch) {
+    DialogBot(String patch) {
         this.patch = patch;
     }
 

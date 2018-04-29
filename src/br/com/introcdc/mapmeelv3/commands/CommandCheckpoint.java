@@ -10,7 +10,7 @@ import br.com.introcdc.mapmeelv3.Utils;
 public class CommandCheckpoint implements CommandExecutor {
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Utils.errou((Player) sender);
         }

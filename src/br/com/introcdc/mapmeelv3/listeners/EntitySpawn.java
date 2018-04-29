@@ -23,12 +23,12 @@ public class EntitySpawn implements Listener {
     public static boolean antiFlood = false;
 
     @EventHandler
-    public void onPotion(final PotionSplashEvent event) {
+    public void onPotion(PotionSplashEvent event) {
         event.setCancelled(true);
     }
 
     @EventHandler
-    public void onSpawn(final EntitySpawnEvent event) {
+    public void onSpawn(EntitySpawnEvent event) {
         if (event.getEntity().getType().equals(EntityType.PRIMED_TNT) | event.getEntity() instanceof TNTPrimed | event.getEntity().getType().equals(EntityType.ENDER_CRYSTAL) | event.getEntity() instanceof EnderCrystal | event.getEntity() instanceof EnderDragon | event.getEntity().getType().equals(
             EntityType.SPLASH_POTION) | event.getEntity() instanceof Explosive | event.getEntity() instanceof ExplosiveMinecart | event.getEntity() instanceof Wither | event.getEntity() instanceof WitherSkull | event.getEntity() instanceof Fireball | event.getEntity() instanceof Enderman | event.getEntity() instanceof Creeper) {
             Utils.sendAlertCMS("Spawn de " + event.getEntityType() + " cancelado!");

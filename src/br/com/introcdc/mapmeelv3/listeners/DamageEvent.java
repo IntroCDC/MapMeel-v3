@@ -15,9 +15,9 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class DamageEvent implements Listener {
 
     @EventHandler
-    public void onDamage(final EntityDamageEvent event) {
+    public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
-            final Player player = (Player) event.getEntity();
+            Player player = (Player) event.getEntity();
             if (MoveEvent.spongeInvenciliby.contains(player.getUniqueId())) {
                 event.setCancelled(true);
                 MoveEvent.spongeInvenciliby.remove(player.getUniqueId());

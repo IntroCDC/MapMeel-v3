@@ -14,11 +14,11 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class CommandMeel implements CommandExecutor {
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
             return false;
         }
-        final Player p = (Player) sender;
+        Player p = (Player) sender;
         if (Profile.getProfile(p.getName()).getCargo().isBefore(Cargo.CONVIDADO)) {
             p.sendMessage(Strings.prefix + "§cVocê não tem permissão para isto!");
             return false;

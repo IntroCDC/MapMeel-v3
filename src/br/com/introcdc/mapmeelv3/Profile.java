@@ -8,7 +8,7 @@ public class Profile {
 
     private static HashMap<String, Profile> profiles = new HashMap<>();
 
-    public static Profile getProfile(final String name) {
+    public static Profile getProfile(String name) {
         if (Profile.getProfiles().containsKey(name)) {
             return Profile.getProfiles().get(name);
         }
@@ -19,7 +19,7 @@ public class Profile {
         return Profile.profiles;
     }
 
-    public static void unloadProfile(final String name) {
+    public static void unloadProfile(String name) {
         Profile.getProfiles().remove(name);
     }
 
@@ -29,11 +29,11 @@ public class Profile {
     private int fails;
     private double flySpeed;
     private Warp location;
-    private final String name;
+    private String name;
 
     private int time;
 
-    public Profile(final String name) {
+    public Profile(String name) {
         this.name = name;
         if (MapMeelMain.getPlugin().getConfig().getString("Profiles." + name + ".Color") != null) {
             this.setColor(MapMeelMain.getPlugin().getConfig().getString("Profiles." + name + ".Color").replace("&", "§"));
@@ -124,25 +124,25 @@ public class Profile {
         return this.audioFundo;
     }
 
-    public void setAudioFundoEnable(final boolean audioFundo) {
+    public void setAudioFundoEnable(boolean audioFundo) {
         this.audioFundo = audioFundo;
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".audioFundo", audioFundo);
         MapMeelMain.getPlugin().saveConfig();
     }
 
-    public void setCargo(final Cargo cargo) {
+    public void setCargo(Cargo cargo) {
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".Cargo", cargo.getName());
         MapMeelMain.getPlugin().saveConfig();
         this.cargo = cargo;
     }
 
-    public void setColor(final String color) {
+    public void setColor(String color) {
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".Color", color.replace("§", "&"));
         MapMeelMain.getPlugin().saveConfig();
         this.color = color;
     }
 
-    public void setFlySpeed(final double flySpeed) {
+    public void setFlySpeed(double flySpeed) {
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".flySpeed", flySpeed);
         MapMeelMain.getPlugin().saveConfig();
         this.flySpeed = flySpeed;
@@ -151,13 +151,13 @@ public class Profile {
         }
     }
 
-    public void setLocation(final Warp location) {
+    public void setLocation(Warp location) {
         this.location = location;
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".Location", location.getName());
         MapMeelMain.getPlugin().saveConfig();
     }
 
-    public void setTime(final int time) {
+    public void setTime(int time) {
         this.time = time;
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".time", time);
         MapMeelMain.getPlugin().saveConfig();

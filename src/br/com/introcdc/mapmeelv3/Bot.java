@@ -15,7 +15,7 @@ public class Bot {
 
     private static HashMap<Integer, Bot> bots = new HashMap<>();
 
-    public static Bot getBot(final int id) {
+    public static Bot getBot(int id) {
         if (Bot.getBots().containsKey(id)) {
             return Bot.getBots().get(id);
         }
@@ -26,14 +26,14 @@ public class Bot {
         return Bot.bots;
     }
 
-    private final DialogBot dialog;
-    private final int id;
-    private final Location location;
-    private final String nick;
+    private DialogBot dialog;
+    private int id;
+    private Location location;
+    private String nick;
 
-    private final NPC npc;
+    private NPC npc;
 
-    public Bot(final String nick, final Location location, final DialogBot dialog) {
+    public Bot(String nick, Location location, DialogBot dialog) {
         this.nick = nick;
         this.location = location;
         this.dialog = dialog;
@@ -66,7 +66,7 @@ public class Bot {
         return this.npc;
     }
 
-    public void playDialog(final Player player) {
+    public void playDialog(Player player) {
         if (player == null) {
             this.getNpc().setName(this.getNick());
             return;
@@ -100,7 +100,7 @@ public class Bot {
                 if (Bukkit.getOnlinePlayers().size() >= 1) {
                     Player p = null;
                     double distancia = 10000000;
-                    for (final Player pl : Bukkit.getOnlinePlayers()) {
+                    for (Player pl : Bukkit.getOnlinePlayers()) {
                         if (!pl.getWorld().equals(Bot.this.location.getWorld())) {
                             continue;
                         }

@@ -41,9 +41,9 @@ import net.minecraft.server.v1_10_R1.PlayerConnection;
 
 public class Utils {
 
-    public static final Random random = new Random();
+    public static Random random = new Random();
 
-    public static void checkForPlayAudio(final Player player, final boolean stop) {
+    public static void checkForPlayAudio(Player player, boolean stop) {
         if (Profile.getProfile(player.getName()).isAudioFundoOn()) {
             if (stop) {
                 Utils.playSound(player, Audio.PARAR);
@@ -57,13 +57,13 @@ public class Utils {
         }
     }
 
-    public static String convertToDate(final long number) {
-        final Calendar calendar = Calendar.getInstance();
+    public static String convertToDate(long number) {
+        Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(number);
         return Utils.placeZero(calendar.get(Calendar.DAY_OF_MONTH)) + "/" + Utils.placeZero(calendar.get(Calendar.MONTH) + 1) + "/" + Utils.placeZero(calendar.get(Calendar.YEAR)) + " - " + Utils.placeZero(calendar.get(Calendar.HOUR_OF_DAY) + 1) + ":" + Utils.placeZero(calendar.get(Calendar.MINUTE)) + ":" + Utils.placeZero(calendar.get(Calendar.SECOND));
     }
 
-    public static long convertToMilliSeconds(long tempo, final String tipo) {
+    public static long convertToMilliSeconds(long tempo, String tipo) {
         tempo = tempo * 1000;
         if (tipo.equalsIgnoreCase("s")) {
             return tempo;
@@ -95,10 +95,10 @@ public class Utils {
         }
     }
 
-    public static NPC createNPC(final EntityType type, final String name, final Location location, final String skin) {
-        final NPC npc = CitizensAPI.getNPCRegistry().createNPC(type, name);
+    public static NPC createNPC(EntityType type, String name, Location location, String skin) {
+        NPC npc = CitizensAPI.getNPCRegistry().createNPC(type, name);
         if (skin != null) {
-            final SkinnableEntity skinnable = NMS.getSkinnable(npc.getEntity());
+            SkinnableEntity skinnable = NMS.getSkinnable(npc.getEntity());
             if (skinnable != null) {
                 skinnable.setSkinName(skin);
             }
@@ -107,12 +107,12 @@ public class Utils {
         return npc;
     }
 
-    public static void errou(final Player player) {
+    public static void errou(Player player) {
         player.setHealth(20);
         player.setFoodLevel(20);
         player.setFireTicks(0);
         player.sendMessage(Strings.prefix + "§4§lERRROOOOUUU!!!!!");
-        final Audio a = Audio.ERROU;
+        Audio a = Audio.ERROU;
         String pitch;
         if (Utils.random.nextBoolean()) {
             pitch = "0.";
@@ -140,7 +140,7 @@ public class Utils {
     }
 
     public static Player getMeel() {
-        for (final Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             if (Profile.getProfile(player.getName()).getCargo().equals(Cargo.MEEL)) {
                 return player;
             }
@@ -148,13 +148,13 @@ public class Utils {
         return null;
     }
 
-    public static Class<?> getNmsClass(final String nmsClassName) throws ClassNotFoundException {
+    public static Class<?> getNmsClass(String nmsClassName) throws ClassNotFoundException {
         return Class.forName("net.minecraft.server." + Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3] + "." + nmsClassName);
     }
 
-    public static int getPing(final Player p) {
-        final CraftPlayer cp = (CraftPlayer) p;
-        final EntityPlayer ep = cp.getHandle();
+    public static int getPing(Player p) {
+        CraftPlayer cp = (CraftPlayer) p;
+        EntityPlayer ep = cp.getHandle();
         return ep.ping;
     }
 
@@ -183,7 +183,7 @@ public class Utils {
     }
 
     public static boolean isMeelOn() {
-        for (final Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             if (Profile.getProfile(player.getName()).getCargo().equals(Cargo.MEEL)) {
                 return true;
             }
@@ -191,10 +191,10 @@ public class Utils {
         return false;
     }
 
-    public static void launchFireworks(final Location location) {
-        final Firework f = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
-        final FireworkMeta fMeta = f.getFireworkMeta();
-        final ArrayList<Color> colors = new ArrayList<>();
+    public static void launchFireworks(Location location) {
+        Firework f = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
+        FireworkMeta fMeta = f.getFireworkMeta();
+        ArrayList<Color> colors = new ArrayList<>();
         colors.add(Color.AQUA);
         colors.add(Color.BLACK);
         colors.add(Color.BLUE);
@@ -211,7 +211,7 @@ public class Utils {
         colors.add(Color.SILVER);
         colors.add(Color.WHITE);
         colors.add(Color.YELLOW);
-        final FireworkEffect effect = FireworkEffect.builder().flicker(true).trail(true).withFade(colors.get(Utils.random.nextInt(colors.size())), colors.get(Utils.random.nextInt(colors.size()))).withColor(colors.get(Utils.random.nextInt(colors.size())), colors.get(Utils.random.nextInt(colors.size()))).flicker(true).trail(true).build();
+        FireworkEffect effect = FireworkEffect.builder().flicker(true).trail(true).withFade(colors.get(Utils.random.nextInt(colors.size())), colors.get(Utils.random.nextInt(colors.size()))).withColor(colors.get(Utils.random.nextInt(colors.size())), colors.get(Utils.random.nextInt(colors.size()))).flicker(true).trail(true).build();
         fMeta.addEffect(effect);
         f.setFireworkMeta(fMeta);
         f.setCustomName("Firework");
@@ -288,7 +288,7 @@ public class Utils {
         new Bot("Base62", new Location(Bukkit.getWorld("world_the_end"), 2395.5, 105.0, 2176.5), DialogBot.ZERAR_VIDA);
         new Bot("Base62", new Location(Bukkit.getWorld("world_the_end"), 4129.5, 64.0, 3387.5), DialogBot.LEVEL_4_4D);
         new Bot("Base62", new Location(Bukkit.getWorld("world_the_end"), 5808.5, 58.0, 4950.5), DialogBot.LEVEL_4_EASTEREGG_1);
-        new Bot("Base65", new Location(Bukkit.getWorld("world_the_end"), 5796.5, 57.0, 4893.5), DialogBot.LEVEL_4_EASTEREGG_2);
+        new Bot("Base65", new Location(Bukkit.getWorld("world_the_end"), 5796.5, 57.0, 4892.5), DialogBot.LEVEL_4_EASTEREGG_2);
     }
 
     public static void loadCheckpoints() throws MaxChangedBlocksException, DataException, IOException {
@@ -387,8 +387,8 @@ public class Utils {
         new Portal("L_FINAL", Warp.EASTEREGG_2.getLocation(), new Location(Bukkit.getWorld("world"), 8.5, 4.0, 30.5), null);
     }
 
-    public static HashSet<Block> nearBlocks(final Location loc, final int radius) {
-        final HashSet<Block> blocks = new HashSet<>();
+    public static HashSet<Block> nearBlocks(Location loc, int radius) {
+        HashSet<Block> blocks = new HashSet<>();
         for (int x = -radius; x <= radius; ++x) {
             for (int z = -radius; z <= radius; ++z) {
                 for (int y = -radius; y <= radius; ++y) {
@@ -399,11 +399,11 @@ public class Utils {
         return blocks;
     }
 
-    public static String placeZero(final long number) {
+    public static String placeZero(long number) {
         return number >= 10 ? Long.toString(number) : String.format("0%s", Long.toString(number));
     }
 
-    public static void playDialog(final Player player, final DialogBot dialog) {
+    public static void playDialog(Player player, DialogBot dialog) {
         if (dialog != null && player != null) {
             Utils.playSound(player, Audio.PARAR);
             new BukkitRunnable() {
@@ -415,7 +415,7 @@ public class Utils {
         }
     }
 
-    public static void playSound(final Player player, final Audio audio) {
+    public static void playSound(Player player, Audio audio) {
         if (player == null || audio == null) {
             return;
         }
@@ -444,13 +444,13 @@ public class Utils {
         }
     }
 
-    public static void sendActionBar(final Player player, final String message) {
-        final PacketPlayOutChat chat = new PacketPlayOutChat(ChatSerializer.a("{\"text\":\"" + message + "\"}"), (byte) 2);
+    public static void sendActionBar(Player player, String message) {
+        PacketPlayOutChat chat = new PacketPlayOutChat(ChatSerializer.a("{\"text\":\"" + message + "\"}"), (byte) 2);
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(chat);
     }
 
-    public static void sendAlert(final String message) {
-        for (final Player p : Bukkit.getOnlinePlayers()) {
+    public static void sendAlert(String message) {
+        for (Player p : Bukkit.getOnlinePlayers()) {
             if (Profile.getProfile(p.getName()).getCargo().isOp()) {
                 p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_FALL, 1, 50000);
                 p.sendMessage("§4§l§m==============================");
@@ -463,8 +463,8 @@ public class Utils {
         Bukkit.getConsoleSender().sendMessage("§4§l§m==============================");
     }
 
-    public static void sendAlertCMS(final String message) {
-        for (final Player p : Bukkit.getOnlinePlayers()) {
+    public static void sendAlertCMS(String message) {
+        for (Player p : Bukkit.getOnlinePlayers()) {
             if (Profile.getProfile(p.getName()).getCargo().isOp()) {
                 p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BASS, 0, 50000);
                 p.sendMessage(Strings.cmsPrefix + "§f§l" + message.replace("&", "§"));
@@ -474,50 +474,50 @@ public class Utils {
     }
 
     @SuppressWarnings("JavaReflectionMemberAccess")
-    public static void sendTablist(final Player player, final String Header, final String Footer) {
+    public static void sendTablist(Player player, String Header, String Footer) {
         try {
-            final Object header = Utils.getNmsClass("IChatBaseComponent$ChatSerializer").getMethod("a", String.class).invoke(null, "{\"text\": \"" + Header + "\"}");
-            final Object footer = Utils.getNmsClass("IChatBaseComponent$ChatSerializer").getMethod("a", String.class).invoke(null, "{\"text\": \"" + Footer + "\"}");
-            final Object ppoplhf = Utils.getNmsClass("PacketPlayOutPlayerListHeaderFooter").getConstructor(new Class[] { Utils.getNmsClass("IChatBaseComponent") }).newInstance(header);
-            final Field f = ppoplhf.getClass().getDeclaredField("b");
+            Object header = Utils.getNmsClass("IChatBaseComponent$ChatSerializer").getMethod("a", String.class).invoke(null, "{\"text\": \"" + Header + "\"}");
+            Object footer = Utils.getNmsClass("IChatBaseComponent$ChatSerializer").getMethod("a", String.class).invoke(null, "{\"text\": \"" + Footer + "\"}");
+            Object ppoplhf = Utils.getNmsClass("PacketPlayOutPlayerListHeaderFooter").getConstructor(new Class[] { Utils.getNmsClass("IChatBaseComponent") }).newInstance(header);
+            Field f = ppoplhf.getClass().getDeclaredField("b");
             f.setAccessible(true);
             f.set(ppoplhf, footer);
-            final Object nmsp = player.getClass().getMethod("getHandle").invoke(player);
-            final Object pcon = nmsp.getClass().getField("playerConnection").get(nmsp);
+            Object nmsp = player.getClass().getMethod("getHandle").invoke(player);
+            Object pcon = nmsp.getClass().getField("playerConnection").get(nmsp);
             pcon.getClass().getMethod("sendPacket", Utils.getNmsClass("Packet")).invoke(pcon, ppoplhf);
-        } catch (final Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void sendTitle(final Player player, final String title, final String subtitle, final int fadeIn, final int duration, final int fadeOut) {
+    public static void sendTitle(Player player, String title, String subtitle, int fadeIn, int duration, int fadeOut) {
         Preconditions.checkNotNull(title, "Title cannot be null");
         Preconditions.checkNotNull(subtitle, "Subtitle cannot be null");
-        final PacketPlayOutTitle timingsPacket = new PacketPlayOutTitle(EnumTitleAction.TIMES, null, fadeIn, duration, fadeOut);
-        final PacketPlayOutTitle titlePacket = new PacketPlayOutTitle(EnumTitleAction.TITLE, ChatSerializer.a("{\"text\":\"" + title + "\"}"));
-        final PacketPlayOutTitle subtitlePacket = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, ChatSerializer.a("{\"text\":\"" + subtitle + "\"}"));
-        final PlayerConnection playerConnection = ((CraftPlayer) player).getHandle().playerConnection;
+        PacketPlayOutTitle timingsPacket = new PacketPlayOutTitle(EnumTitleAction.TIMES, null, fadeIn, duration, fadeOut);
+        PacketPlayOutTitle titlePacket = new PacketPlayOutTitle(EnumTitleAction.TITLE, ChatSerializer.a("{\"text\":\"" + title + "\"}"));
+        PacketPlayOutTitle subtitlePacket = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, ChatSerializer.a("{\"text\":\"" + subtitle + "\"}"));
+        PlayerConnection playerConnection = ((CraftPlayer) player).getHandle().playerConnection;
         playerConnection.sendPacket(timingsPacket);
         playerConnection.sendPacket(titlePacket);
         playerConnection.sendPacket(subtitlePacket);
     }
 
     public static String sToTime(long seconds) {
-        final long years = seconds / 32140800;
-        final long months = seconds % 32140800 / 2678400;
-        final long days = seconds % 2678400 / 86400;
-        final long hours = seconds % 86400 / 3600;
-        final long minutes = seconds % 3600 / 60;
+        long years = seconds / 32140800;
+        long months = seconds % 32140800 / 2678400;
+        long days = seconds % 2678400 / 86400;
+        long hours = seconds % 86400 / 3600;
+        long minutes = seconds % 3600 / 60;
         seconds = seconds % 60;
         return (years > 0 ? Utils.placeZero(years) + "A " : "") + (months > 0 ? Utils.placeZero(months) + "M " : "") + (days > 0 ? Utils.placeZero(days) + "d " : "") + (hours > 0 ? Utils.placeZero(hours) + "h " : "") + (minutes > 0 ? Utils.placeZero(minutes) + "m " : "") + (seconds > 0 ? Utils.placeZero(seconds) + "s" : "");
     }
 
     public static String sToTimeComplete(long seconds) {
-        final long years = seconds / 32140800;
-        final long months = seconds % 32140800 / 2678400;
-        final long days = seconds % 2678400 / 86400;
-        final long hours = seconds % 86400 / 3600;
-        final long minutes = seconds % 3600 / 60;
+        long years = seconds / 32140800;
+        long months = seconds % 32140800 / 2678400;
+        long days = seconds % 2678400 / 86400;
+        long hours = seconds % 86400 / 3600;
+        long minutes = seconds % 3600 / 60;
         seconds = seconds % 60;
         return (years > 0 ? Utils.placeZero(years) + (years == 1 ? " Ano " : " Anos ") : "") + (months > 0 ? Utils.placeZero(months) + (months == 1 ? " Mês " : " Meses ") : "") + (days > 0 ? Utils.placeZero(days) + (days == 1 ? " Dia " : " Dias ") : "") + (hours > 0 ? Utils.placeZero(hours) + (hours == 1 ? " Hora " : " Horas ") : "") + (minutes > 0 ? Utils.placeZero(minutes) + (minutes == 1 ? " Minuto " : " Minutos ") : "") + Utils.placeZero(seconds) + (seconds == 1 ? " Segundo" : " Segundos");
     }

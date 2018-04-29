@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class CoreOverwatchState {
 
     private String message;
-    private final ArrayList<CoreOverwatchPlayerState> states;
+    private ArrayList<CoreOverwatchPlayerState> states;
 
     public CoreOverwatchState() {
         this.states = new ArrayList<>();
@@ -19,8 +19,8 @@ public class CoreOverwatchState {
         return this.message;
     }
 
-    public CoreOverwatchPlayerState getState(final Player player) {
-        for (final CoreOverwatchPlayerState state : this.states) {
+    public CoreOverwatchPlayerState getState(Player player) {
+        for (CoreOverwatchPlayerState state : this.states) {
             if (state.getPlayer().getUniqueId().equals(player.getUniqueId())) {
                 return state;
             }
@@ -32,13 +32,13 @@ public class CoreOverwatchState {
         return this.states;
     }
 
-    public void setMessage(final String message) {
+    public void setMessage(String message) {
         this.message = message;
     }
 
-    public void write(final PrintWriter writer) {
+    public void write(PrintWriter writer) {
         StringBuilder line = new StringBuilder();
-        for (final CoreOverwatchPlayerState state : this.states) {
+        for (CoreOverwatchPlayerState state : this.states) {
             line.append(state.toString()).append(";");
         }
         if (this.getMessage() != null) {

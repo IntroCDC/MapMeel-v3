@@ -18,7 +18,7 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class CommandTeatro implements CommandExecutor {
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             if (Profile.getProfile(sender.getName()).getCargo().isBefore(Cargo.ADMIN)) {
                 sender.sendMessage(Strings.prefix + "§cVocê não tem permissão para isto!");
@@ -42,7 +42,7 @@ public class CommandTeatro implements CommandExecutor {
         } else if (args.length == 2) {
             if (args[0].equalsIgnoreCase("historia")) {
                 if (args[1].equalsIgnoreCase("iniciar")) {
-                    for (final Player p : Bukkit.getOnlinePlayers()) {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
                         Utils.playSound(p, Audio.PARAR);
                     }
                     sender.sendMessage(Strings.prefix + "§fIniciando história...");
@@ -60,11 +60,11 @@ public class CommandTeatro implements CommandExecutor {
                     sender.sendMessage(Strings.prefix + "§fParando história...");
                     HistoriaMapMeelv3.start = false;
                     HistoriaMapMeelv3.autoStarted = false;
-                    for (final Player p : Bukkit.getOnlinePlayers()) {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
                         Utils.playSound(p, Audio.PARAR);
                     }
                 } else if (args[1].equalsIgnoreCase("teste")) {
-                    for (final Player p : Bukkit.getOnlinePlayers()) {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
                         Utils.playSound(p, Audio.PARAR);
                     }
                     sender.sendMessage(Strings.prefix + "§fIniciando história...");

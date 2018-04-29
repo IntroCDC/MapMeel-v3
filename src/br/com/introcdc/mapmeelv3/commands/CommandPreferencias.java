@@ -16,14 +16,14 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class CommandPreferencias implements CommandExecutor {
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(Strings.prefix + "§cApenas jogadores inGame podem executar este comando!");
             return false;
         }
-        final Inventory inv = Bukkit.createInventory(null, 36, "Preferencias (" + sender.getName() + ")");
-        final ItemStack cor = new ItemStack(Material.WOOL);
-        final ItemMeta corMeta = cor.getItemMeta();
+        Inventory inv = Bukkit.createInventory(null, 36, "Preferencias (" + sender.getName() + ")");
+        ItemStack cor = new ItemStack(Material.WOOL);
+        ItemMeta corMeta = cor.getItemMeta();
         corMeta.setDisplayName("Escolher Cor");
         cor.setItemMeta(corMeta);
         short color = 0;
@@ -60,13 +60,13 @@ public class CommandPreferencias implements CommandExecutor {
         }
         cor.setDurability(color);
 
-        final ItemStack flySpeed = new ItemStack(Material.FEATHER);
-        final ItemMeta flySpeedMeta = flySpeed.getItemMeta();
+        ItemStack flySpeed = new ItemStack(Material.FEATHER);
+        ItemMeta flySpeedMeta = flySpeed.getItemMeta();
         flySpeedMeta.setDisplayName("FlySpeed");
         flySpeed.setItemMeta(flySpeedMeta);
 
-        final ItemStack audioFundo = new ItemStack(Material.JUKEBOX);
-        final ItemMeta audioFundoMeta = audioFundo.getItemMeta();
+        ItemStack audioFundo = new ItemStack(Material.JUKEBOX);
+        ItemMeta audioFundoMeta = audioFundo.getItemMeta();
         audioFundoMeta.setDisplayName("Áudio de Fundo: " + (Profile.getProfile(sender.getName()).isAudioFundoOn() ? "§a§oLigado" : "§c§oDesligado"));
         audioFundo.setItemMeta(audioFundoMeta);
 

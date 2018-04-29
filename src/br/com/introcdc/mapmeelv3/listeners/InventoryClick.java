@@ -19,8 +19,8 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class InventoryClick implements Listener {
 
     @EventHandler
-    public void onClick(final InventoryClickEvent event) {
-        final Player player = (Player) event.getWhoClicked();
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
         if (event.getCurrentItem() == null || event.getCurrentItem().getItemMeta() == null || event.getCurrentItem().getItemMeta().getDisplayName() == null) {
             return;
         }
@@ -115,24 +115,24 @@ public class InventoryClick implements Listener {
                     event.getCurrentItem().setDurability((short) 0);
                 }
             } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("FlySpeed")) {
-                final Inventory inv = Bukkit.createInventory(null, 9, "Preferencias (" + player.getName() + ")");
+                Inventory inv = Bukkit.createInventory(null, 9, "Preferencias (" + player.getName() + ")");
                 for (int i = 1; i <= 9; i++) {
-                    final ItemStack flySpeed = new ItemStack(Material.FEATHER);
-                    final ItemMeta flySpeedMeta = flySpeed.getItemMeta();
+                    ItemStack flySpeed = new ItemStack(Material.FEATHER);
+                    ItemMeta flySpeedMeta = flySpeed.getItemMeta();
                     flySpeedMeta.setDisplayName("x" + i);
                     flySpeed.setItemMeta(flySpeedMeta);
                     inv.addItem(flySpeed);
                 }
                 player.openInventory(inv);
             } else if (event.getCurrentItem().getType().equals(Material.FEATHER) && event.getCurrentItem().getItemMeta().getDisplayName().startsWith("x")) {
-                final String numero = "0." + event.getCurrentItem().getItemMeta().getDisplayName().replace("x", "");
-                final double quantify = Double.parseDouble(numero);
+                String numero = "0." + event.getCurrentItem().getItemMeta().getDisplayName().replace("x", "");
+                double quantify = Double.parseDouble(numero);
                 Profile.getProfile(player.getName()).setFlySpeed(quantify);
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0, 50000);
                 player.sendMessage(Strings.prefix + "Seu Fly Speed foi alterado para §a§l" + event.getCurrentItem().getItemMeta().getDisplayName() + "§f!");
                 player.closeInventory();
             } else if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("Áudio de Fundo: ") && event.getCurrentItem().getType().equals(Material.JUKEBOX)) {
-                final ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
+                ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0, 50000);
                 if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Áudio de Fundo: §a§oLigado")) {
                     Profile.getProfile(player.getName()).setAudioFundoEnable(false);

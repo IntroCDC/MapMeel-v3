@@ -13,7 +13,7 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class CommandInvis implements CommandExecutor {
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(Strings.prefix + "§cEste comando só pode ser executado por jogadores inGame!");
             return false;

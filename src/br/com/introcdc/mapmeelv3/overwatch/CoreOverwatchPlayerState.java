@@ -6,16 +6,16 @@ import org.bukkit.inventory.ItemStack;
 public class CoreOverwatchPlayerState {
 
     private boolean damage;
-    private final int fireTicks;
-    private final double health;
+    private int fireTicks;
+    private double health;
     private boolean hitting;
-    private final double hunger;
-    private final ItemStack itemInv;
-    private final Player player;
-    private final boolean sneaking;
-    private final boolean sprinting;
+    private double hunger;
+    private ItemStack itemInv;
+    private Player player;
+    private boolean sneaking;
+    private boolean sprinting;
 
-    public CoreOverwatchPlayerState(final Player player) {
+    public CoreOverwatchPlayerState(Player player) {
         this.player = player;
         this.itemInv = player.getInventory().getItemInHand();
         this.fireTicks = player.getFireTicks();
@@ -57,11 +57,11 @@ public class CoreOverwatchPlayerState {
         return this.sprinting;
     }
 
-    public void setDamage(final boolean damage) {
+    public void setDamage(boolean damage) {
         this.damage = damage;
     }
 
-    public void setHitting(final boolean hitting) {
+    public void setHitting(boolean hitting) {
         this.hitting = hitting;
     }
 

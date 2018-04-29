@@ -27,7 +27,7 @@ public class InteractEvent implements Listener {
     public static ArrayList<UUID> Lava = new ArrayList<>();
 
     @EventHandler
-    public void onInteract(final PlayerInteractEvent event) {
+    public void onInteract(PlayerInteractEvent event) {
         if (event.getAction().equals(Action.PHYSICAL) && Profile.getProfile(event.getPlayer().getName()).getLocation().equals(Warp.EASTEREGG_2)) {
             if (event.getPlayer().getLocation().getBlock().getType().equals(Material.GOLD_PLATE)) {
                 event.setCancelled(true);
@@ -62,8 +62,8 @@ public class InteractEvent implements Listener {
                         }
                     }
                     event.getPlayer().sendMessage(Strings.prefix + "§fVocê recebeu um minecart!");
-                    final ItemStack item = new ItemStack(Material.MINECART);
-                    final ItemMeta itemMeta = item.getItemMeta();
+                    ItemStack item = new ItemStack(Material.MINECART);
+                    ItemMeta itemMeta = item.getItemMeta();
                     itemMeta.setDisplayName("§7Minecart");
                     item.setItemMeta(itemMeta);
                     event.getPlayer().getInventory().addItem(item);
@@ -77,8 +77,8 @@ public class InteractEvent implements Listener {
                             return;
                         }
                     }
-                    final ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                    final BookMeta itemMeta = (BookMeta) book.getItemMeta();
+                    ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+                    BookMeta itemMeta = (BookMeta) book.getItemMeta();
                     itemMeta.setPages("Outubro:\nNa época que o IntroBase64 estava ativo, mesmo não sendo bots e sem recebimento de informações, o Intro sempre tinha algumas informações que ele mesmo via.");
                     itemMeta.setDisplayName("Relato 1");
                     itemMeta.setAuthor("MapMeel v3");
@@ -93,8 +93,8 @@ public class InteractEvent implements Listener {
                             return;
                         }
                     }
-                    final ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                    final BookMeta itemMeta = (BookMeta) book.getItemMeta();
+                    ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+                    BookMeta itemMeta = (BookMeta) book.getItemMeta();
                     itemMeta.setPages("Novembro:\nEsta época foi a de mais sofrimento do Intro, que foi a mesma época que várias pessoas tinham parado de falar com ele por causa de suas ações com o IntroBase64, então logo depois de Dezembro, todos voltaram a falar com o Intro e foi o fim do", "IntroBase64...");
                     itemMeta.setDisplayName("Relato 2");
                     itemMeta.setAuthor("MapMeel v3");
@@ -112,8 +112,8 @@ public class InteractEvent implements Listener {
                         }
                     }
                     event.getPlayer().sendMessage(Strings.prefix + "§fVocê recebeu o item de andar na lava!");
-                    final ItemStack item = new ItemStack(Material.MAGMA_CREAM);
-                    final ItemMeta itemMeta = item.getItemMeta();
+                    ItemStack item = new ItemStack(Material.MAGMA_CREAM);
+                    ItemMeta itemMeta = item.getItemMeta();
                     itemMeta.setDisplayName("§7Andar na lava (10s)");
                     item.setItemMeta(itemMeta);
                     event.getPlayer().getInventory().addItem(item);
@@ -128,23 +128,23 @@ public class InteractEvent implements Listener {
                         }
                     }
                     event.getPlayer().sendMessage(Strings.prefix + "§fVocê recebeu o umas gravações e uma cabeça!");
-                    final ItemStack recording_1 = new ItemStack(Material.getMaterial(2257));
-                    final ItemMeta recording_1Meta = recording_1.getItemMeta();
+                    ItemStack recording_1 = new ItemStack(Material.getMaterial(2257));
+                    ItemMeta recording_1Meta = recording_1.getItemMeta();
                     recording_1Meta.setDisplayName("Gravação #1");
                     recording_1.setItemMeta(recording_1Meta);
                     event.getPlayer().getInventory().addItem(recording_1);
-                    final ItemStack recording_2 = new ItemStack(Material.getMaterial(2258));
-                    final ItemMeta recording_2Meta = recording_2.getItemMeta();
+                    ItemStack recording_2 = new ItemStack(Material.getMaterial(2258));
+                    ItemMeta recording_2Meta = recording_2.getItemMeta();
                     recording_2Meta.setDisplayName("Gravação #2");
                     recording_2.setItemMeta(recording_2Meta);
                     event.getPlayer().getInventory().addItem(recording_2);
-                    final ItemStack recording_3 = new ItemStack(Material.getMaterial(2259));
-                    final ItemMeta recording_3Meta = recording_3.getItemMeta();
+                    ItemStack recording_3 = new ItemStack(Material.getMaterial(2259));
+                    ItemMeta recording_3Meta = recording_3.getItemMeta();
                     recording_3Meta.setDisplayName("Gravação #3");
                     recording_3.setItemMeta(recording_3Meta);
                     event.getPlayer().getInventory().addItem(recording_3);
-                    final ItemStack cabeca = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
-                    final SkullMeta cabecaMeta = (SkullMeta) cabeca.getItemMeta();
+                    ItemStack cabeca = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
+                    SkullMeta cabecaMeta = (SkullMeta) cabeca.getItemMeta();
                     cabecaMeta.setOwner("Base64_");
                     cabecaMeta.setDisplayName("Ha Ha Ha Ha Ha");
                     cabeca.setItemMeta(cabecaMeta);
@@ -158,8 +158,8 @@ public class InteractEvent implements Listener {
                         }
                     }
                     event.getPlayer().sendMessage(Strings.prefix + "§fVocê recebeu um minecart!");
-                    final ItemStack item = new ItemStack(Material.MINECART);
-                    final ItemMeta itemMeta = item.getItemMeta();
+                    ItemStack item = new ItemStack(Material.MINECART);
+                    ItemMeta itemMeta = item.getItemMeta();
                     itemMeta.setDisplayName("§7Minecart");
                     item.setItemMeta(itemMeta);
                     event.getPlayer().getInventory().addItem(item);

@@ -16,8 +16,8 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class CommandPreProcess implements Listener {
 
     @EventHandler
-    public void onCMD(final ServerCommandEvent event) {
-        final String message = event.getCommand().toLowerCase();
+    public void onCMD(ServerCommandEvent event) {
+        String message = event.getCommand().toLowerCase();
         if (message.contains("tnt") || message.contains("46") || message.contains("explosive")) {
             event.setCancelled(true);
             event.getSender().sendMessage(Strings.prefix + "§4§lUSO DE COMANDO COM 'TNT', '46' ou 'EXPLOSIVE' SÃO EXTREMAMENTE PROIBIDOS!");
@@ -25,8 +25,8 @@ public class CommandPreProcess implements Listener {
     }
 
     @EventHandler
-    public void onCommand(final PlayerCommandPreprocessEvent event) {
-        final String message = event.getMessage().toLowerCase();
+    public void onCommand(PlayerCommandPreprocessEvent event) {
+        String message = event.getMessage().toLowerCase();
         if (CoreOverwatch.recording) {
             if (CoreOverwatch.currentState != null) {
                 CoreOverwatch.currentState.setMessage(event.getPlayer().getName() + " executou o comando: " + message);
@@ -58,7 +58,7 @@ public class CommandPreProcess implements Listener {
     }
 
     @EventHandler
-    public void onGamemode(final PlayerGameModeChangeEvent event) {
+    public void onGamemode(PlayerGameModeChangeEvent event) {
         if (Profile.getProfile(event.getPlayer().getName()).getCargo().equals(Cargo.JOGADOR) && !event.getNewGameMode().equals(GameMode.ADVENTURE)) {
             event.setCancelled(true);
             event.getPlayer().setGameMode(GameMode.ADVENTURE);

@@ -79,8 +79,8 @@ public enum Audio {
     WIN_4("Win4",
           "mapmeelv3.win4");
 
-    public static Audio byName(final String name) {
-        for (final Audio a : Audio.values()) {
+    public static Audio byName(String name) {
+        for (Audio a : Audio.values()) {
             if (a.getName().equalsIgnoreCase(name)) {
                 return a;
             }
@@ -88,8 +88,8 @@ public enum Audio {
         return Audio.PARAR;
     }
 
-    public static boolean existsAudio(final String name) {
-        for (final Audio a : Audio.values()) {
+    public static boolean existsAudio(String name) {
+        for (Audio a : Audio.values()) {
             if (a.getName().equalsIgnoreCase(name)) {
                 return true;
             }
@@ -101,7 +101,7 @@ public enum Audio {
 
     private String patch;
 
-    Audio(final String name, final String patch) {
+    Audio(String name, String patch) {
         this.name = name;
         this.patch = patch;
     }

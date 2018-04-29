@@ -49,14 +49,14 @@ public class LeaveJoin implements Listener {
     public static ArrayList<String> respondendoTextura = new ArrayList<>();
 
     @EventHandler
-    public void onJoin(final PlayerJoinEvent event) {
-        final ArrayList<World> worlds = new ArrayList<>();
+    public void onJoin(PlayerJoinEvent event) {
+        ArrayList<World> worlds = new ArrayList<>();
         worlds.add(Bukkit.getWorld("world"));
         worlds.add(Bukkit.getWorld("world_nether"));
         worlds.add(Bukkit.getWorld("world_the_end"));
 
-        for (final World world : worlds) {
-            for (final Entity entity : world.getEntities()) {
+        for (World world : worlds) {
+            for (Entity entity : world.getEntities()) {
                 if (entity.getType().equals(EntityType.PRIMED_TNT) || entity instanceof TNTPrimed || entity.getType().equals(EntityType.ENDER_CRYSTAL) || entity instanceof EnderCrystal || entity.getType().equals(EntityType.SPLASH_POTION) || entity instanceof Explosive || entity instanceof ExplosiveMinecart || entity instanceof Wither || entity instanceof WitherSkull || entity instanceof Fireball || entity instanceof Enderman || entity instanceof Creeper || entity instanceof Item) {
                     entity.remove();
                 }
@@ -89,7 +89,7 @@ public class LeaveJoin implements Listener {
             }
         }
         Profile.getProfile(event.getPlayer().getName()).setFlySpeed(Profile.getProfile(event.getPlayer().getName()).getFlySpeed());
-        for (final Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             if (Profile.getProfile(player.getName()).getCargo().isOp()) {
                 player.sendMessage(Strings.prefix + "§2§l§m==============================");
                 player.sendMessage(Strings.prefix + "§a§l§oJOGADOR ENTROU NO SERVIDOR");
@@ -108,11 +108,11 @@ public class LeaveJoin implements Listener {
         Bukkit.getConsoleSender().sendMessage(Strings.prefix + "§a§lCargo: §f§l" + Profile.getProfile(event.getPlayer().getName()).getCargo().getName());
         Bukkit.getConsoleSender().sendMessage(Strings.prefix + "§2§l§m==============================");
         if (Profile.getProfile(event.getPlayer().getName()).getCargo().equals(Cargo.MEEL)) {
-            final Profile p = Profile.getProfile(event.getPlayer().getName());
-            final Player pp = event.getPlayer();
+            Profile p = Profile.getProfile(event.getPlayer().getName());
+            Player pp = event.getPlayer();
             CoreOverwatch.startRecord("Meel entrou no servidor! Warp: " + p.getLocation().getName() + " (" + pp.getWorld().getName() + ", " + (int) pp.getLocation().getX() + ", " + (int) pp.getLocation().getY() + ", " + (int) pp.getLocation().getZ() + ")");
             Profile.getProfile(event.getPlayer().getName()).setAudioFundoEnable(true);
-            for (final Player player : Bukkit.getOnlinePlayers()) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
                 if (Profile.getProfile(player.getName()).getCargo().equals(Cargo.JOGADOR)) {
                     player.kickPlayer(ScoreManager.randomString() + "\n\n§cA Meel entrou no servidor, Executando mapa...");
                 }
@@ -156,8 +156,8 @@ public class LeaveJoin implements Listener {
     }
 
     @EventHandler
-    public void onLogin(final PlayerLoginEvent event) {
-        for (final Player player : Bukkit.getOnlinePlayers()) {
+    public void onLogin(PlayerLoginEvent event) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             if (Profile.getProfile(player.getName()).getCargo().isOp()) {
                 player.sendMessage(Strings.prefix + "§6§l§m==============================");
                 player.sendMessage(Strings.prefix + "§e§l§oJOGADOR LOGANDO NO SERVIDOR");
@@ -202,12 +202,12 @@ public class LeaveJoin implements Listener {
     }
 
     @EventHandler
-    public void onQuit(final PlayerQuitEvent event) {
+    public void onQuit(PlayerQuitEvent event) {
         event.setQuitMessage(null);
         if (LeaveJoin.respondendoTextura.contains(event.getPlayer().getName())) {
             LeaveJoin.respondendoTextura.remove(event.getPlayer().getName());
         }
-        for (final Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             if (Profile.getProfile(player.getName()).getCargo().isOp()) {
                 player.sendMessage(Strings.prefix + "§4§l§m==============================");
                 player.sendMessage(Strings.prefix + "§c§l§oJOGADOR SAIU DO SERVIDOR");

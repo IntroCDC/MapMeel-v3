@@ -12,8 +12,8 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class MotdEvent implements Listener {
 
     @EventHandler
-    public void onPing(final ServerListPingEvent event) {
-        final ArrayList<String> motds = new ArrayList<>();
+    public void onPing(ServerListPingEvent event) {
+        ArrayList<String> motds = new ArrayList<>();
         motds.add(Strings.prefix + "MapMeel v3 by Intro!");
         motds.add(Strings.prefix + "10/01/2017 ;3");
         motds.add(Strings.prefix + "Don't let me Down!");

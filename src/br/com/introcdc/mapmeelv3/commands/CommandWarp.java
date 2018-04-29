@@ -22,7 +22,7 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class CommandWarp implements CommandExecutor {
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             if (Profile.getProfile(sender.getName()).getCargo().isBefore(Cargo.ADMIN)) {
                 sender.sendMessage(Strings.prefix + "§cVocê não tem permissão para isto!");
@@ -31,8 +31,8 @@ public class CommandWarp implements CommandExecutor {
         }
         if (args.length == 0) {
             sender.sendMessage(Strings.prefix + "§cUso correto: /" + command.getName() + " [warp] [nick(OPCIONAL)]");
-            final ArrayList<String> names = new ArrayList<>();
-            for (final Warp a : Warp.values()) {
+            ArrayList<String> names = new ArrayList<>();
+            for (Warp a : Warp.values()) {
                 names.add(a.getName());
             }
             sender.sendMessage(Strings.prefix + "§fWarps: " + names.toString().replace("[", "").replace("]", ""));
@@ -40,14 +40,14 @@ public class CommandWarp implements CommandExecutor {
         }
         if (!Warp.existsWarp(args[0])) {
             sender.sendMessage(Strings.prefix + "§cWarp inexistente!");
-            final ArrayList<String> names = new ArrayList<>();
-            for (final Warp a : Warp.values()) {
+            ArrayList<String> names = new ArrayList<>();
+            for (Warp a : Warp.values()) {
                 names.add(a.getName());
             }
             sender.sendMessage(Strings.prefix + "§fWarps: " + names.toString().replace("[", "").replace("]", ""));
             return false;
         }
-        final Warp warp = Warp.byName(args[0]);
+        Warp warp = Warp.byName(args[0]);
         if (args.length == 1) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(Strings.prefix + "§cApenas jogadores inGame podem executar este comando!");
@@ -70,7 +70,7 @@ public class CommandWarp implements CommandExecutor {
                 sender.sendMessage(Strings.prefix + "§cEste jogador está offline!");
                 return false;
             }
-            final Player p = Bukkit.getPlayer(args[1]);
+            Player p = Bukkit.getPlayer(args[1]);
             if (sender instanceof Player) {
                 if (Utils.isMeelOn()) {
                     if (Utils.getMeel().getName().equalsIgnoreCase(p.getName())) {

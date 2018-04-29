@@ -90,8 +90,8 @@ public enum Warp {
                         new Location(Bukkit.getWorld("world"), 6000.5, 100, 6000.5),
                         null);
 
-    public static Warp byLocation(final Location location) {
-        for (final Warp w : Warp.values()) {
+    public static Warp byLocation(Location location) {
+        for (Warp w : Warp.values()) {
             if (w.getLocation().equals(location)) {
                 return w;
             }
@@ -99,8 +99,8 @@ public enum Warp {
         return null;
     }
 
-    public static Warp byName(final String name) {
-        for (final Warp w : Warp.values()) {
+    public static Warp byName(String name) {
+        for (Warp w : Warp.values()) {
             if (w.getName().equalsIgnoreCase(name)) {
                 return w;
             }
@@ -108,8 +108,8 @@ public enum Warp {
         return null;
     }
 
-    public static boolean existsWarp(final String name) {
-        for (final Warp w : Warp.values()) {
+    public static boolean existsWarp(String name) {
+        for (Warp w : Warp.values()) {
             if (w.getName().equalsIgnoreCase(name)) {
                 return true;
             }
@@ -123,7 +123,7 @@ public enum Warp {
 
     private String name;
 
-    Warp(final String name, final Location location, final Audio fundo) {
+    Warp(String name, Location location, Audio fundo) {
         this.name = name;
         this.location = location;
         this.fundo = fundo;

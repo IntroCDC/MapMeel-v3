@@ -6,18 +6,18 @@ import java.util.HashMap;
 
 public class LevelChecker {
 
-    private static final HashMap<String, LevelChecker> ALL_CHECKERS = new HashMap<>();
+    private static HashMap<String, LevelChecker> ALL_CHECKERS = new HashMap<>();
 
     public static HashMap<String, LevelChecker> getAllCheckers() {
         return LevelChecker.ALL_CHECKERS;
     }
 
-    private final String name;
-    private final ArrayList<Nivel> nivel;
-    private final Runnable runnableNotPassed;
-    private final Runnable runnablePass;
+    private String name;
+    private ArrayList<Nivel> nivel;
+    private Runnable runnableNotPassed;
+    private Runnable runnablePass;
 
-    public LevelChecker(final String name, final Runnable runnablePass, final Runnable runnableNotPassed, final Nivel[] niveis) {
+    public LevelChecker(String name, Runnable runnablePass, Runnable runnableNotPassed, Nivel[] niveis) {
         this.name = name;
         this.runnablePass = runnablePass;
         this.runnableNotPassed = runnableNotPassed;
@@ -27,9 +27,9 @@ public class LevelChecker {
     }
 
     public void checkForUpdate() {
-        final int pass = this.getNivel().size();
+        int pass = this.getNivel().size();
         int passed = 0;
-        for (final Nivel nivel : Nivel.values()) {
+        for (Nivel nivel : Nivel.values()) {
             if (nivel.isCleared()) {
                 passed++;
             }

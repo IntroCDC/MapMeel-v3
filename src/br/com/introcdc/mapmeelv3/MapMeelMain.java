@@ -70,7 +70,7 @@ public class MapMeelMain extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        for (final Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             player.sendMessage(Strings.prefix + "§4§l§m==============================");
             player.sendMessage(Strings.prefix + "§c§lStatus: §f§lPlugin descarregado com sucesso!");
             player.sendMessage(Strings.prefix + "§c§lPlugin: §f§l" + MapMeelMain.plugin.getName());
@@ -87,7 +87,7 @@ public class MapMeelMain extends JavaPlugin {
     @Override
     public void onEnable() {
         MapMeelMain.plugin = this;
-        for (final Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             CheckpointManager.getCache().put(player.getUniqueId(), Profile.getProfile(player.getName()).getLocation().getLocation());
             player.sendMessage(Strings.prefix + "§2§l§m==============================");
             player.sendMessage(Strings.prefix + "§a§lStatus: §f§lPlugin carregado com sucesso!");
@@ -139,13 +139,13 @@ public class MapMeelMain extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(Strings.prefix + "§a§lVersão (Bukkit): §f§l" + Bukkit.getServer().getBukkitVersion());
         Bukkit.getConsoleSender().sendMessage(Strings.prefix + "§2§l§m==============================");
 
-        final ArrayList<World> worlds = new ArrayList<>();
+        ArrayList<World> worlds = new ArrayList<>();
         worlds.add(Bukkit.getWorld("world"));
         worlds.add(Bukkit.getWorld("world_nether"));
         worlds.add(Bukkit.getWorld("world_the_end"));
 
-        for (final World world : worlds) {
-            for (final Entity entity : world.getEntities()) {
+        for (World world : worlds) {
+            for (Entity entity : world.getEntities()) {
                 if (entity.getType().equals(EntityType.PRIMED_TNT) || entity instanceof TNTPrimed || entity.getType().equals(EntityType.ENDER_CRYSTAL) || entity instanceof EnderCrystal || entity.getType().equals(EntityType.SPLASH_POTION) || entity instanceof Explosive || entity instanceof ExplosiveMinecart || entity instanceof Wither || entity instanceof WitherSkull || entity instanceof Fireball || entity instanceof Enderman || entity instanceof Creeper || entity instanceof Item) {
                     entity.remove();
                 }
@@ -171,7 +171,7 @@ public class MapMeelMain extends JavaPlugin {
                 } catch (MaxChangedBlocksException | DataException | IOException e) {
                     e.printStackTrace();
                 }
-                for (final Player player : Bukkit.getOnlinePlayers()) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
                     if (Profile.getProfile(player.getName()).isAudioFundoOn()) {
                         Utils.playSound(player, Audio.PARAR);
                         new BukkitRunnable() {
@@ -188,7 +188,7 @@ public class MapMeelMain extends JavaPlugin {
                     }
                 }
                 if (Utils.isMeelOn()) {
-                    for (final Player player : Bukkit.getOnlinePlayers()) {
+                    for (Player player : Bukkit.getOnlinePlayers()) {
                         if (Profile.getProfile(player.getName()).getCargo().equals(Cargo.JOGADOR)) {
                             player.kickPlayer(ScoreManager.randomString() + "\n\n§cA Meel entrou no servidor!");
                         }
@@ -212,7 +212,7 @@ public class MapMeelMain extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        for (final Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             player.sendMessage(Strings.prefix + "§6§l§m==============================");
             player.sendMessage(Strings.prefix + "§e§lStatus: §f§lCarregando plugin...");
             player.sendMessage(Strings.prefix + "§e§lVersão (Bukkit): §f§l" + Bukkit.getServer().getBukkitVersion());

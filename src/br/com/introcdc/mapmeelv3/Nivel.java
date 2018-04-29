@@ -94,9 +94,9 @@ public enum Nivel {
          Warp.L_4D,
          Audio.WIN_4);
 
-    public static boolean checkLevel(final Nivel... niveis) {
+    public static boolean checkLevel(Nivel... niveis) {
         int pass = 0;
-        for (final Nivel nivel : niveis) {
+        for (Nivel nivel : niveis) {
             if (nivel.isCleared()) {
                 pass++;
             }
@@ -111,7 +111,7 @@ public enum Nivel {
 
     private Audio win;
 
-    Nivel(final String name, final Location placar, final Warp warp, final Audio win) {
+    Nivel(String name, Location placar, Warp warp, Audio win) {
         this.name = name;
         this.placar = placar;
         this.warp = warp;
@@ -145,12 +145,12 @@ public enum Nivel {
         return this.cleared;
     }
 
-    public void setCleared(final boolean cleared) {
+    public void setCleared(boolean cleared) {
         this.cleared = cleared;
         MapMeelMain.getPlugin().getConfig().set("Niveis." + this.name + ".Cleared", cleared);
         MapMeelMain.getPlugin().saveConfig();
         if (this.placar != null) {
-            for (final Block b : Utils.nearBlocks(this.placar, 8)) {
+            for (Block b : Utils.nearBlocks(this.placar, 8)) {
                 if (!b.getType().equals(Material.WOOL)) {
                     continue;
                 }
@@ -162,7 +162,7 @@ public enum Nivel {
             }
         }
         if (cleared) {
-            for (final Player p : Bukkit.getOnlinePlayers()) {
+            for (Player p : Bukkit.getOnlinePlayers()) {
                 p.sendMessage(Strings.prefix + "§aParabéns! §fO Nível §a" + this.name + "§f foi completado com sucesso!");
                 Utils.sendTitle(p, "§2§lParabéns!", "§fO Nível §a§l" + this.name + "§f foi completado!", 10, 40, 10);
                 p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 50000);
@@ -176,7 +176,7 @@ public enum Nivel {
                 }
             }
         }
-        for (final String ss : LevelChecker.getAllCheckers().keySet()) {
+        for (String ss : LevelChecker.getAllCheckers().keySet()) {
             LevelChecker.getAllCheckers().get(ss).checkForUpdate();
         }
     }

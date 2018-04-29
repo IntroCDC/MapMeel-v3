@@ -18,16 +18,16 @@ public class HistoriaMapMeelv3P2 extends HistoriaMapMeelv3 {
     public static Location intro_casa = new Location(Bukkit.getWorlds().get(0), 4981.5, 36.0, 4869.5);
     public static Location meel_hotel = new Location(Bukkit.getWorlds().get(0), 5024.5, 38.0, 4868.5);
 
-    public static void startHistory(final Player player) {
+    public static void startHistory(Player player) {
         HistoriaMapMeelv3.reloadAllSkins();
 
         HistoriaMapMeelv3.toggleLightsAudience(false);
         HistoriaMapMeelv3.toggleLightsStage(false, "tudo");
         HistoriaMapMeelv3.loadConstruction("teatroFNegra");
 
-        final Location location = Warp.FINAL.getLocation();
+        Location location = Warp.FINAL.getLocation();
 
-        for (final Player pl : Bukkit.getOnlinePlayers()) {
+        for (Player pl : Bukkit.getOnlinePlayers()) {
             pl.teleport(new Location(Bukkit.getWorlds().get(0), 5002, 36, 4890, 180, -8));
             Utils.playSound(pl, Audio.HISTORIA_2);
         }
@@ -251,7 +251,7 @@ public class HistoriaMapMeelv3P2 extends HistoriaMapMeelv3 {
                     new BukkitRunnable() {
                         @Override
                         public void run() {
-                            final Location dest = location.clone();
+                            Location dest = location.clone();
                             dest.setY(dest.getY() + 100);
                             dest.setDirection(player.getLocation().getDirection());
                             if (Utils.isMeelOn()) {
@@ -260,7 +260,7 @@ public class HistoriaMapMeelv3P2 extends HistoriaMapMeelv3 {
                                 }
                             }
                             player.teleport(dest);
-                            final Warp warp = Warp.FINAL;
+                            Warp warp = Warp.FINAL;
                             if (warp != null) {
                                 Profile.getProfile(player.getName()).setLocation(warp);
                                 CheckpointManager.resetCurrentCheckPoint(player);

@@ -42,8 +42,8 @@ public class CoreOverwatch implements Listener {
     public static PrintWriter writer = null;
 
     public static ArrayList<String> listOverwatches() {
-        final ArrayList<String> list = new ArrayList<>();
-        for (final File file : new File("Overwatches/").listFiles()) {
+        ArrayList<String> list = new ArrayList<>();
+        for (File file : new File("Overwatches/").listFiles()) {
             if (file.isDirectory()) {
                 list.add(file.getName());
             }
@@ -51,53 +51,53 @@ public class CoreOverwatch implements Listener {
         return list;
     }
 
-    public static boolean replay(final String name, final CommandSender sender) throws FileNotFoundException {
+    public static boolean replay(String name, CommandSender sender) throws FileNotFoundException {
         if (!new File("Overwatches/" + name + "/log.overwatch").exists()) {
             return false;
         }
         sender.sendMessage(Strings.prefix + "§fCarregando replay overwatch §a" + name + "§f...");
-        final Scanner scanner = new Scanner(new File("Overwatches/" + name + "/log.overwatch"));
-        final HashMap<String, NPC> allNpcs = new HashMap<>();
+        Scanner scanner = new Scanner(new File("Overwatches/" + name + "/log.overwatch"));
+        HashMap<String, NPC> allNpcs = new HashMap<>();
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (scanner.hasNext()) {
-                    final String line = scanner.nextLine();
+                    String line = scanner.nextLine();
                     if (line.startsWith("!!!")) {
                         sender.sendMessage(Strings.prefix + "§fNota do Overwatch: §a" + line.replace("!!!", ""));
                     }
-                    final String[] args = line.split(";");
-                    for (final String log : args) {
+                    String[] args = line.split(";");
+                    for (String log : args) {
                         if (log.startsWith("///")) {
                             Bukkit.broadcastMessage("§8(OVERWATCH) §f" + log.replace("///", ""));
                         } else {
-                            final String[] states = log.split(":");
+                            String[] states = log.split(":");
                             if (states.length >= 15) {
-                                final String name = states[0];
-                                final String world = states[1];
-                                final double x = Double.parseDouble(states[2]);
-                                final double y = Double.parseDouble(states[3]);
-                                final double z = Double.parseDouble(states[4]);
-                                final float yaw = Float.parseFloat(states[5]);
-                                final float pitch = Float.parseFloat(states[6]);
-                                final boolean sneaking = Boolean.parseBoolean(states[7]);
-                                final boolean hitting = Boolean.parseBoolean(states[8]);
-                                final boolean damage = Boolean.parseBoolean(states[9]);
-                                final double fireTicks = Double.parseDouble(states[10]);
-                                final double health = Double.parseDouble(states[11]);
-                                final double food = Double.parseDouble(states[12]);
-                                final boolean sprinting = Boolean.parseBoolean(states[13]);
-                                final String itemInv = states[14];
+                                String name = states[0];
+                                String world = states[1];
+                                double x = Double.parseDouble(states[2]);
+                                double y = Double.parseDouble(states[3]);
+                                double z = Double.parseDouble(states[4]);
+                                float yaw = Float.parseFloat(states[5]);
+                                float pitch = Float.parseFloat(states[6]);
+                                boolean sneaking = Boolean.parseBoolean(states[7]);
+                                boolean hitting = Boolean.parseBoolean(states[8]);
+                                boolean damage = Boolean.parseBoolean(states[9]);
+                                double fireTicks = Double.parseDouble(states[10]);
+                                double health = Double.parseDouble(states[11]);
+                                double food = Double.parseDouble(states[12]);
+                                boolean sprinting = Boolean.parseBoolean(states[13]);
+                                String itemInv = states[14];
                                 if (allNpcs.containsKey(name)) {
                                     if (damage) {
                                         ((LivingEntity) allNpcs.get(name).getEntity()).damage(0);
                                     }
-                                    final PlayerNPC playerNPC = (PlayerNPC) allNpcs.get(name).getEntity();
+                                    PlayerNPC playerNPC = (PlayerNPC) allNpcs.get(name).getEntity();
                                     try {
                                         playerNPC.getInventory().setItem(0, new ItemStack(Material.valueOf(itemInv)));
-                                    } catch (final Exception ignored) {
+                                    } catch (Exception ignored) {
                                     }
-                                    final EntityHumanNPC entityHumanNPC = playerNPC.getHandle();
+                                    EntityHumanNPC entityHumanNPC = playerNPC.getHandle();
                                     playerNPC.setHealth(health);
                                     playerNPC.setFoodLevel((int) food);
                                     playerNPC.setFireTicks((int) fireTicks);
@@ -109,9 +109,9 @@ public class CoreOverwatch implements Listener {
                                         entityHumanNPC.a(EnumHand.MAIN_HAND);
                                     }
                                 } else {
-                                    final NPC npc = Utils.createNPC(EntityType.PLAYER, name, new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch), null);
-                                    final PlayerNPC playerNPC = (PlayerNPC) npc.getEntity();
-                                    final EntityHumanNPC entityHumanNPC = playerNPC.getHandle();
+                                    NPC npc = Utils.createNPC(EntityType.PLAYER, name, new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch), null);
+                                    PlayerNPC playerNPC = (PlayerNPC) npc.getEntity();
+                                    EntityHumanNPC entityHumanNPC = playerNPC.getHandle();
                                     entityHumanNPC.abilities.canFly = true;
                                     entityHumanNPC.abilities.isFlying = true;
                                     allNpcs.put(name, npc);
@@ -121,7 +121,7 @@ public class CoreOverwatch implements Listener {
                     }
                 } else {
                     sender.sendMessage(Strings.prefix + "§fReplay do overwatch §a" + name + "§f terminou de ser executado com sucesso...");
-                    for (final String key : allNpcs.keySet()) {
+                    for (String key : allNpcs.keySet()) {
                         allNpcs.get(key).despawn();
                     }
                     allNpcs.clear();
@@ -133,7 +133,7 @@ public class CoreOverwatch implements Listener {
         return true;
     }
 
-    public static String startRecord(final String message) {
+    public static String startRecord(String message) {
         if (CoreOverwatch.recording) {
             return null;
         }
@@ -145,7 +145,7 @@ public class CoreOverwatch implements Listener {
                 CoreOverwatch.fileLog = new File("Overwatches/" + "OW-" + CoreOverwatch.currentDate + "/log.overwatch");
                 try {
                     CoreOverwatch.fileLog.createNewFile();
-                } catch (final IOException e1) {
+                } catch (IOException e1) {
                     e1.printStackTrace();
                 }
                 try {
@@ -154,7 +154,7 @@ public class CoreOverwatch implements Listener {
                         CoreOverwatch.writer.println("!!!" + message);
                         CoreOverwatch.writer.flush();
                     }
-                } catch (final FileNotFoundException e) {
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
                 CoreOverwatch.recording = true;
@@ -182,7 +182,7 @@ public class CoreOverwatch implements Listener {
                         CoreOverwatch.currentState.write(CoreOverwatch.writer);
                     }
                     CoreOverwatch.currentState = new CoreOverwatchState();
-                    for (final Player player : Bukkit.getOnlinePlayers()) {
+                    for (Player player : Bukkit.getOnlinePlayers()) {
                         CoreOverwatch.currentState.getStates().add(new CoreOverwatchPlayerState(player));
                     }
                 }
@@ -191,7 +191,7 @@ public class CoreOverwatch implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onChat(final AsyncPlayerChatEvent event) {
+    public void onChat(AsyncPlayerChatEvent event) {
         if (!CoreOverwatch.recording || CoreOverwatch.currentState == null || CoreOverwatch.writer == null) {
             return;
         }
@@ -201,7 +201,7 @@ public class CoreOverwatch implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onDamage(final EntityDamageEvent event) {
+    public void onDamage(EntityDamageEvent event) {
         if (!CoreOverwatch.recording || CoreOverwatch.currentState == null || CoreOverwatch.writer == null) {
             return;
         }
@@ -213,7 +213,7 @@ public class CoreOverwatch implements Listener {
     }
 
     @EventHandler
-    public void onInteract(final PlayerInteractEvent event) {
+    public void onInteract(PlayerInteractEvent event) {
         if (!CoreOverwatch.recording || CoreOverwatch.currentState == null || CoreOverwatch.writer == null) {
             return;
         }

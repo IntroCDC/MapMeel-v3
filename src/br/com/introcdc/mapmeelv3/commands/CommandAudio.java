@@ -21,7 +21,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 public class CommandAudio implements CommandExecutor {
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             if (Profile.getProfile(sender.getName()).getCargo().isBefore(Cargo.ADMIN)) {
                 sender.sendMessage(Strings.prefix + "§cVocê não tem permissão para isto!");
@@ -32,15 +32,15 @@ public class CommandAudio implements CommandExecutor {
             sender.sendMessage(Strings.prefix + "§cUso correto: /" + command.getName() + " <Áudio/Fundo> [Jogador/ALL(OPCIONAL)] [delay(segundos/OPCIONAL)]");
             if (!(sender instanceof Player)) {
                 StringBuilder audios = new StringBuilder();
-                for (final Audio a : Audio.values()) {
+                for (Audio a : Audio.values()) {
                     audios.append("§a").append(a.getName()).append("§f,");
                 }
                 sender.sendMessage(Strings.prefix + "§fÁudios: " + audios);
                 return false;
             } else {
-                final TextComponent audios = new TextComponent(Strings.prefix + "§fÁudios: ");
-                for (final Audio a : Audio.values()) {
-                    final TextComponent audio = new TextComponent("§a" + a.getName() + "§f,");
+                TextComponent audios = new TextComponent(Strings.prefix + "§fÁudios: ");
+                for (Audio a : Audio.values()) {
+                    TextComponent audio = new TextComponent("§a" + a.getName() + "§f,");
                     audio.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7§l! §7Clique para tocar a música!").create()));
                     audio.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/audio " + a.getName()));
                     audios.addExtra(audio);
@@ -53,7 +53,7 @@ public class CommandAudio implements CommandExecutor {
         if (args.length == 3) {
             try {
                 tempo = Integer.parseInt(args[2]);
-            } catch (final Exception e) {
+            } catch (Exception e) {
                 sender.sendMessage(Strings.prefix + "§cNúmero inválido!");
                 return false;
             }
@@ -69,13 +69,13 @@ public class CommandAudio implements CommandExecutor {
         if (!Audio.existsAudio(args[0])) {
             sender.sendMessage(Strings.prefix + "§cÁudio inexistente!");
             StringBuilder audios = new StringBuilder();
-            for (final Audio a : Audio.values()) {
+            for (Audio a : Audio.values()) {
                 audios.append("§a").append(a.getName()).append("§f,");
             }
             sender.sendMessage(Strings.prefix + "§fÁudios: " + audios);
             return false;
         }
-        final Audio audio = Audio.byName(args[0]);
+        Audio audio = Audio.byName(args[0]);
         if (args.length == 1 || args[1].equalsIgnoreCase("all")) {
             if (audio.equals(Audio.PARAR)) {
                 if (tempo == 0) {
@@ -99,7 +99,7 @@ public class CommandAudio implements CommandExecutor {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    for (final Player p : Bukkit.getOnlinePlayers()) {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
                         Utils.playSound(p, audio);
                     }
                     if (audio.equals(Audio.PARAR)) {
@@ -120,7 +120,7 @@ public class CommandAudio implements CommandExecutor {
                 sender.sendMessage(Strings.prefix + "§cEste jogador está offline...");
                 return false;
             }
-            final Player pl = Bukkit.getPlayer(args[1]);
+            Player pl = Bukkit.getPlayer(args[1]);
             if (audio.equals(Audio.PARAR)) {
                 if (tempo == 0) {
                     sender.sendMessage(Strings.prefix + "§fParando todos os áudios em execução de §a" + pl.getName() + "§f!");

@@ -10,11 +10,11 @@ import org.bukkit.event.world.ChunkLoadEvent;
 public class WorldEvents implements Listener {
 
     @EventHandler
-    public void chunkLoad(final ChunkLoadEvent event) {
-        final Chunk chunk = event.getChunk();
+    public void chunkLoad(ChunkLoadEvent event) {
+        Chunk chunk = event.getChunk();
         for (int x = 0; x <= 16; x++) {
             for (int z = 0; z <= 16; z++) {
-                final Block block = chunk.getBlock(x, 0, z);
+                Block block = chunk.getBlock(x, 0, z);
                 if (block.getBiome() == Biome.VOID) {
                     block.setBiome(Biome.PLAINS);
                 }

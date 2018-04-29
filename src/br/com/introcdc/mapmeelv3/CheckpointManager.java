@@ -14,18 +14,18 @@ public class CheckpointManager {
         return CheckpointManager.cache;
     }
 
-    public static Location getCurrentCheckpoint(final Player player) {
+    public static Location getCurrentCheckpoint(Player player) {
         if (Warp.byLocation(CheckpointManager.cache.get(player.getUniqueId())) != null) {
             return null;
         }
         return CheckpointManager.cache.get(player.getUniqueId());
     }
 
-    public static void resetCurrentCheckPoint(final Player player) {
+    public static void resetCurrentCheckPoint(Player player) {
         CheckpointManager.cache.replace(player.getUniqueId(), Profile.getProfile(player.getName()).getLocation().getLocation());
     }
 
-    public static Location setCurrentCheckpoint(final Player player, final Location location) {
+    public static Location setCurrentCheckpoint(Player player, Location location) {
         CheckpointManager.cache.replace(player.getUniqueId(), location);
         return location;
     }

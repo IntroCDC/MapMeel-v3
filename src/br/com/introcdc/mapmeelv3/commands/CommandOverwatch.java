@@ -22,7 +22,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 public class CommandOverwatch implements CommandExecutor {
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             if (Profile.getProfile(sender.getName()).getCargo().isBefore(Cargo.ADMIN)) {
                 sender.sendMessage(Strings.prefix + "§cVocê não tem permissão para isto!");
@@ -56,9 +56,9 @@ public class CommandOverwatch implements CommandExecutor {
                     sender.sendMessage(Strings.prefix + "§cEste comando só pode ser executado por jogadores inGame!");
                     return false;
                 }
-                final TextComponent message = new TextComponent(Strings.prefix + "§fOverwatches: §a");
-                for (final String name : CoreOverwatch.listOverwatches()) {
-                    final TextComponent overwatch = new TextComponent("§a" + name + "§f, ");
+                TextComponent message = new TextComponent(Strings.prefix + "§fOverwatches: §a");
+                for (String name : CoreOverwatch.listOverwatches()) {
+                    TextComponent overwatch = new TextComponent("§a" + name + "§f, ");
                     overwatch.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§f§l! §fColocar este nome no seu chat!").create()));
                     overwatch.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/overwatch replay/delete " + name));
                     message.addExtra(overwatch);
@@ -71,10 +71,10 @@ public class CommandOverwatch implements CommandExecutor {
                     sender.sendMessage(Strings.prefix + "§cOverwatch não encontrado!");
                     return false;
                 }
-                final String name = args[1];
+                String name = args[1];
                 try {
                     CoreOverwatch.replay(name, sender);
-                } catch (final FileNotFoundException e) {
+                } catch (FileNotFoundException e) {
                     sender.sendMessage(Strings.prefix + "§cOcorreu um erro ao iniciar o replay da gravação...");
                 }
                 return false;
@@ -84,11 +84,11 @@ public class CommandOverwatch implements CommandExecutor {
                     sender.sendMessage(Strings.prefix + "§cOverwatch não encontrado!");
                     return false;
                 }
-                final String name = args[1];
+                String name = args[1];
                 try {
                     FileUtils.deleteDirectory(new File("Overwatches/" + name));
                     sender.sendMessage(Strings.prefix + "§fVocê deletou o overwatch com o nome §a" + name + "§f com sucesso!");
-                } catch (final IOException e) {
+                } catch (IOException e) {
                     sender.sendMessage(Strings.prefix + "§cOcorreu um erro ao deletar o overwatch...");
                     e.printStackTrace();
                 }

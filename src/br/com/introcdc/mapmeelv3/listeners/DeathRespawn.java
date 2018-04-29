@@ -17,7 +17,7 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class DeathRespawn implements Listener {
 
     @EventHandler
-    public void onDeath(final PlayerDeathEvent event) {
+    public void onDeath(PlayerDeathEvent event) {
         event.setDeathMessage(null);
         new BukkitRunnable() {
             @Override
@@ -28,13 +28,13 @@ public class DeathRespawn implements Listener {
     }
 
     @EventHandler
-    public void onFood(final FoodLevelChangeEvent event) {
+    public void onFood(FoodLevelChangeEvent event) {
         event.setCancelled(true);
         ((Player) event.getEntity()).setFoodLevel(20);
     }
 
     @EventHandler
-    public void onRespawn(final PlayerRespawnEvent event) {
+    public void onRespawn(PlayerRespawnEvent event) {
         if (Utils.isMeelOn()) {
             if (Utils.getMeel().getName().equalsIgnoreCase(event.getPlayer().getName())) {
                 MoveEvent.teleporting = true;

@@ -13,7 +13,7 @@ import br.com.introcdc.mapmeelv3.variables.Strings;
 public class CommandSetCargo implements CommandExecutor {
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             if (Profile.getProfile(sender.getName()).getCargo().isBefore(Cargo.ADMIN)) {
                 sender.sendMessage(Strings.prefix + "§cVocê não tem permissão para isto!");
@@ -32,7 +32,7 @@ public class CommandSetCargo implements CommandExecutor {
             sender.sendMessage(Strings.prefix + "§cEste cargo não existe!");
             return false;
         }
-        final Cargo cargo = Cargo.byName(args[1]);
+        Cargo cargo = Cargo.byName(args[1]);
         String nick = args[0];
         if (Bukkit.getPlayer(nick) != null) {
             nick = Bukkit.getPlayer(nick).getName();
