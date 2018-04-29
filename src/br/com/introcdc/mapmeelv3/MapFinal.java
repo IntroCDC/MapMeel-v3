@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 import br.com.introcdc.mapmeelv3.listeners.MoveEvent;
 import br.com.introcdc.mapmeelv3.variables.Strings;
 
-public class Map{
+public class MapFinal {
 
     public static Random random = new Random();
 

@@ -1,11 +1,11 @@
 package br.com.introcdc.mapmeelv3.listeners;
 
+import br.com.introcdc.mapmeelv3.MapFinal;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import br.com.introcdc.mapmeelv3.MapFinal;
 import br.com.introcdc.mapmeelv3.MapMeelMain;
 import br.com.introcdc.mapmeelv3.Profile;
 import br.com.introcdc.mapmeelv3.Utils;

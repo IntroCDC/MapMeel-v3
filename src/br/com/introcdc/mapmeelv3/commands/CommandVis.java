@@ -23,9 +23,7 @@ public class CommandVis implements CommandExecutor {
             return false;
         }
         sender.sendMessage(Strings.prefix + "Você está visível para os jogadores!");
-        if (Updater.Invis.contains(((Player) sender).getUniqueId())) {
-            Updater.Invis.remove(((Player) sender).getUniqueId());
-        }
+        Updater.Invis.remove(((Player) sender).getUniqueId());
         return false;
     }
 

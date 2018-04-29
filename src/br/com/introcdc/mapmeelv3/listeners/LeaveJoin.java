@@ -204,9 +204,7 @@ public class LeaveJoin implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         event.setQuitMessage(null);
-        if (LeaveJoin.respondendoTextura.contains(event.getPlayer().getName())) {
-            LeaveJoin.respondendoTextura.remove(event.getPlayer().getName());
-        }
+        LeaveJoin.respondendoTextura.remove(event.getPlayer().getName());
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (Profile.getProfile(player.getName()).getCargo().isOp()) {
                 player.sendMessage(Strings.prefix + "§4§l§m==============================");
