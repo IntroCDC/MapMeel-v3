@@ -24,10 +24,10 @@ public class CommandAdmin implements CommandExecutor {
         }
         if (Updater.Invis.contains(((Player) sender).getUniqueId())) {
             Updater.Invis.remove(((Player) sender).getUniqueId());
-            sender.sendMessage(Strings.prefix + "Você saiu do modo Admin e está visível para todos os jogadores!!");
+            sender.sendMessage(Strings.prefix + "Você saiu do modo Admin e está visível para todos os jogadores!");
         } else {
             Updater.Invis.add(((Player) sender).getUniqueId());
-            sender.sendMessage(Strings.prefix + "Você entrou no modo Admin e está invisível para todos os jogadores!!");
+            sender.sendMessage(Strings.prefix + "Você entrou no modo Admin e está invisível para todos os jogadores!");
         }
         return false;
     }

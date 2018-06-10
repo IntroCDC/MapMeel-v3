@@ -73,7 +73,9 @@ public class HistoriaMapMeelv3 {
         if (HistoriaMapMeelv3.autoStarted) {
             return;
         }
-        HistoriaMapMeelv3.autoStarted = true;
+        if(Continue) {
+            HistoriaMapMeelv3.autoStarted = true;
+        }
 
         HistoriaMapMeelv3.loadConstruction("teatroNada");
         HistoriaMapMeelv3.toggleLightsStage(true, "frente,direita1,direita2,direita3,esquerda1,esquerda2,esquerda3");
@@ -1230,7 +1232,10 @@ public class HistoriaMapMeelv3 {
         if (HistoriaMapMeelv3.start) {
             return;
         }
-        HistoriaMapMeelv3.start = true;
+
+        if(Continue) {
+            HistoriaMapMeelv3.start = true;
+        }
 
         if (!Utils.isMeelOn()) {
             Bukkit.broadcastMessage(Strings.prefix + "§fIniciando teatro no modo teste!");

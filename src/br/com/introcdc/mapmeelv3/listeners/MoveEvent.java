@@ -79,28 +79,28 @@ public class MoveEvent implements Listener {
                 }
             }
         }
-        if (event.getTo().getBlock().getType().equals(Material.ENDER_PORTAL_FRAME) || event.getTo().getBlock().getType().equals(Material.ENDER_PORTAL) || event.getTo().clone().add(0, -1,0).getBlock().getType().equals(Material.ENDER_PORTAL_FRAME) || event.getTo().clone().add(0, -1,0).getBlock().getType().equals(Material.ENDER_PORTAL) && event.getTo().getWorld().getName().equalsIgnoreCase("world_the_end")) {
-            if (MoveEvent.isPlaying) {
-                return;
-            }
-            MoveEvent.isPlaying = true;
+        if (event.getTo().getBlock().getType().toString().contains("PORTAL") && event.getTo().getWorld().getName().equalsIgnoreCase("world_the_end")) {
             if (Utils.isMeelOn()) {
                 if (Utils.getMeel().getName().equalsIgnoreCase(event.getPlayer().getName())) {
+                    if (MoveEvent.isPlaying) {
+                        return;
+                    }
+                    MoveEvent.isPlaying = true;
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         Utils.playSound(player, Audio.BUILD_A_HOME);
                     }
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            MoveEvent.isPlaying = false;
+                        }
+                    }.runTaskLater(MapMeelMain.getPlugin(), 7 * 60 * 20);
                 } else {
                     Utils.playSound(event.getPlayer(), Audio.BUILD_A_HOME);
                 }
             } else {
                 Utils.playSound(event.getPlayer(), Audio.BUILD_A_HOME);
             }
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    MoveEvent.isPlaying = false;
-                }
-            }.runTaskLater(MapMeelMain.getPlugin(), 7 * 60 * 20);
         }
         if (event.getTo().clone().add(0, -1, 0).getBlock().getType().equals(Material.SPONGE)) {
             event.getPlayer().setVelocity(new Vector(0, 5, 0));

@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -110,6 +114,12 @@ public class CoreOverwatch implements Listener {
                                     }
                                 } else {
                                     NPC npc = Utils.createNPC(EntityType.PLAYER, name, new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch), null);
+                                    TextComponent textComponent = new TextComponent("§8(OVERWATCH) §fNovo NPC: §a" + name + " §f§o(Clique para teleportar para ele)");
+                                    textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + x + " " + y + " " + z));
+                                    textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Clique para teleportar! (Mundo: " + world + ")").create()));
+                                    for (Player player : Bukkit.getOnlinePlayers()) {
+                                        player.spigot().sendMessage(textComponent);
+                                    }
                                     PlayerNPC playerNPC = (PlayerNPC) npc.getEntity();
                                     EntityHumanNPC entityHumanNPC = playerNPC.getHandle();
                                     entityHumanNPC.abilities.canFly = true;

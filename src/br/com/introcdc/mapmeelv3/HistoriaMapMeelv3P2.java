@@ -21,6 +21,11 @@ public class HistoriaMapMeelv3P2 extends HistoriaMapMeelv3 {
     public static void startHistory(Player player) {
         HistoriaMapMeelv3.reloadAllSkins();
 
+        if (HistoriaMapMeelv3.start) {
+            return;
+        }
+        HistoriaMapMeelv3.start = true;
+
         HistoriaMapMeelv3.toggleLightsAudience(false);
         HistoriaMapMeelv3.toggleLightsStage(false, "tudo");
         HistoriaMapMeelv3.loadConstruction("teatroFNegra");
@@ -292,6 +297,7 @@ public class HistoriaMapMeelv3P2 extends HistoriaMapMeelv3 {
                         @Override
                         public void run() {
                             Portal.portalCoolDown.remove(player.getUniqueId());
+                            HistoriaMapMeelv3.start = false;
                             MapFinal.start(player);
                         }
                     }.runTaskLater(MapMeelMain.getPlugin(), 200L);
