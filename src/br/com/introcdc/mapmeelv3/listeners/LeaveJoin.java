@@ -108,9 +108,9 @@ public class LeaveJoin implements Listener {
         Bukkit.getConsoleSender().sendMessage(Strings.prefix + "§a§lCargo: §f§l" + Profile.getProfile(event.getPlayer().getName()).getCargo().getName());
         Bukkit.getConsoleSender().sendMessage(Strings.prefix + "§2§l§m==============================");
         if (Profile.getProfile(event.getPlayer().getName()).getCargo().equals(Cargo.MEEL)) {
-            Profile p = Profile.getProfile(event.getPlayer().getName());
-            Player pp = event.getPlayer();
-            CoreOverwatch.startRecord("Meel entrou no servidor! Warp: " + p.getLocation().getName() + " (" + pp.getWorld().getName() + ", " + (int) pp.getLocation().getX() + ", " + (int) pp.getLocation().getY() + ", " + (int) pp.getLocation().getZ() + ")");
+            Profile profile = Profile.getProfile(event.getPlayer().getName());
+            Player meelPlayer = event.getPlayer();
+            CoreOverwatch.startRecord("Meel entrou no servidor! Warp: " + profile.getLocation().getName() + " (" + meelPlayer.getWorld().getName() + ", " + (int) meelPlayer.getLocation().getX() + ", " + (int) meelPlayer.getLocation().getY() + ", " + (int) meelPlayer.getLocation().getZ() + ")");
             Profile.getProfile(event.getPlayer().getName()).setAudioFundoEnable(true);
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (Profile.getProfile(player.getName()).getCargo().equals(Cargo.JOGADOR)) {
@@ -142,9 +142,8 @@ public class LeaveJoin implements Listener {
             public void run() {
                 event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.BLOCK_NOTE_BASS, 1, 50000);
                 event.getPlayer().sendMessage(Strings.cmsPrefix + "§cEste servidor está protegido com o §4§LCMS §cv. 1.0 (Custom Map Security) - Custom Build for 'MapMeel v3'");
-                event.getPlayer().sendMessage(Strings.prefix + "§fÚltima atualização: §a" + Utils.convertToDate(new File("C:/Program Files/VertrigoServ/www/MapMeelv3Texture.zip").lastModified()));
-                event.getPlayer().sendMessage(Strings.prefix + "§fLink para baixar textura atualizada: §a§lhttp://www.kindome.com.br:4321/MapMeelv3Texture.zip");
-                event.getPlayer().sendMessage(Strings.prefix + "§fOu: §a§lhttps://www.mediafire.com/?h7if9pdvm3555fq");
+                event.getPlayer().sendMessage(Strings.prefix + "§fÚltima atualização: §a" + Utils.convertToDate(new File("/var/www/introbase64/assets/template/files/MapMeelv3Texture.zip").lastModified()));
+                event.getPlayer().sendMessage(Strings.prefix + "§fLink para baixar textura atualizada: §a§lhttp://www.mapmeel.com.br/assets/template/files/MapMeelv3Texture.zip");
                 Utils.checkForPlayAudio(event.getPlayer(), true);
             }
         }.runTaskLater(MapMeelMain.getPlugin(), 100L);

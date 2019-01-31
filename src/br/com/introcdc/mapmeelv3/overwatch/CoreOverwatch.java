@@ -92,11 +92,11 @@ public class CoreOverwatch implements Listener {
                                 double food = Double.parseDouble(states[12]);
                                 boolean sprinting = Boolean.parseBoolean(states[13]);
                                 String itemInv = states[14];
-                                if (allNpcs.containsKey(name)) {
+                                if (allNpcs.containsKey(name.toLowerCase())) {
                                     if (damage) {
-                                        ((LivingEntity) allNpcs.get(name).getEntity()).damage(0);
+                                        ((LivingEntity) allNpcs.get(name.toLowerCase()).getEntity()).damage(0);
                                     }
-                                    PlayerNPC playerNPC = (PlayerNPC) allNpcs.get(name).getEntity();
+                                    PlayerNPC playerNPC = (PlayerNPC) allNpcs.get(name.toLowerCase()).getEntity();
                                     try {
                                         playerNPC.getInventory().setItem(0, new ItemStack(Material.valueOf(itemInv)));
                                     } catch (Exception ignored) {
@@ -124,7 +124,7 @@ public class CoreOverwatch implements Listener {
                                     EntityHumanNPC entityHumanNPC = playerNPC.getHandle();
                                     entityHumanNPC.abilities.canFly = true;
                                     entityHumanNPC.abilities.isFlying = true;
-                                    allNpcs.put(name, npc);
+                                    allNpcs.put(name.toLowerCase(), npc);
                                 }
                             }
                         }
@@ -154,6 +154,7 @@ public class CoreOverwatch implements Listener {
                 new File("Overwatches/" + "OW-" + CoreOverwatch.currentDate).mkdir();
                 CoreOverwatch.fileLog = new File("Overwatches/" + "OW-" + CoreOverwatch.currentDate + "/log.overwatch");
                 try {
+                    CoreOverwatch.fileLog.getParentFile().mkdirs();
                     CoreOverwatch.fileLog.createNewFile();
                 } catch (IOException e1) {
                     e1.printStackTrace();

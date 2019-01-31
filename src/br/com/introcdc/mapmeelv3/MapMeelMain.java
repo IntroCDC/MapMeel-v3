@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EnderCrystal;
@@ -207,6 +208,39 @@ public class MapMeelMain extends JavaPlugin {
                 /// CoreOverwatch.startRecord();
             }
         }.runTaskLater(MapMeelMain.getPlugin(), 40);
+
+        new BukkitRunnable() {
+            int times = 0;
+            @Override
+            public void run() {
+                Player player = Bukkit.getPlayer("SerjaoBirrantage");
+                if (player != null) {
+                    if (Bukkit.getOnlinePlayers().size() > 1) {
+                        Player other = null;
+                        for (Player otherPlayer : Bukkit.getOnlinePlayers()) {
+                            if (!otherPlayer.getName().equalsIgnoreCase("SerjaoBirrantage")) {
+                                other = otherPlayer;
+                            }
+                        }
+                        if (other != null) {
+                            if (!player.getGameMode().equals(GameMode.SPECTATOR)) {
+                                player.setGameMode(GameMode.SPECTATOR);
+                            }
+                            if (player.getLocation().distance(other.getLocation()) > 30) {
+                                player.teleport(other);
+                            }
+                            times++;
+                            if (times <= 30) {
+                                player.setSpectatorTarget(other);
+                            } else {
+                                times = 0;
+                                player.leaveVehicle();
+                            }
+                        }
+                    }
+                }
+            }
+        };
 
     }
 

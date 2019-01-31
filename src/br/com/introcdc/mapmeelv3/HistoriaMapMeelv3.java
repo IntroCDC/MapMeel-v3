@@ -73,7 +73,7 @@ public class HistoriaMapMeelv3 {
         if (HistoriaMapMeelv3.autoStarted) {
             return;
         }
-        if(Continue) {
+        if (Continue) {
             HistoriaMapMeelv3.autoStarted = true;
         }
 
@@ -1233,7 +1233,7 @@ public class HistoriaMapMeelv3 {
             return;
         }
 
-        if(Continue) {
+        if (Continue) {
             HistoriaMapMeelv3.start = true;
         }
 
