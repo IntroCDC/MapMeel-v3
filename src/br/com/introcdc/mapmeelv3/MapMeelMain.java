@@ -1,65 +1,22 @@
 package br.com.introcdc.mapmeelv3;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
+import br.com.introcdc.mapmeelv3.commands.*;
+import br.com.introcdc.mapmeelv3.listeners.*;
+import br.com.introcdc.mapmeelv3.overwatch.CoreOverwatch;
+import br.com.introcdc.mapmeelv3.variables.Strings;
+import com.sk89q.worldedit.MaxChangedBlocksException;
+import com.sk89q.worldedit.world.DataException;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.World;
-import org.bukkit.entity.Creeper;
-import org.bukkit.entity.EnderCrystal;
-import org.bukkit.entity.Enderman;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Explosive;
-import org.bukkit.entity.Fireball;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.TNTPrimed;
-import org.bukkit.entity.Wither;
-import org.bukkit.entity.WitherSkull;
+import org.bukkit.entity.*;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.sk89q.worldedit.MaxChangedBlocksException;
-import com.sk89q.worldedit.world.DataException;
-
-import br.com.introcdc.mapmeelv3.commands.CommandAdmin;
-import br.com.introcdc.mapmeelv3.commands.CommandAudio;
-import br.com.introcdc.mapmeelv3.commands.CommandBloqueador;
-import br.com.introcdc.mapmeelv3.commands.CommandCheckpoint;
-import br.com.introcdc.mapmeelv3.commands.CommandInvSee;
-import br.com.introcdc.mapmeelv3.commands.CommandInvis;
-import br.com.introcdc.mapmeelv3.commands.CommandLobby;
-import br.com.introcdc.mapmeelv3.commands.CommandMeel;
-import br.com.introcdc.mapmeelv3.commands.CommandOverwatch;
-import br.com.introcdc.mapmeelv3.commands.CommandPreferencias;
-import br.com.introcdc.mapmeelv3.commands.CommandResetALL;
-import br.com.introcdc.mapmeelv3.commands.CommandSearchBlock;
-import br.com.introcdc.mapmeelv3.commands.CommandSetCargo;
-import br.com.introcdc.mapmeelv3.commands.CommandTeatro;
-import br.com.introcdc.mapmeelv3.commands.CommandTop;
-import br.com.introcdc.mapmeelv3.commands.CommandVis;
-import br.com.introcdc.mapmeelv3.commands.CommandWarp;
-import br.com.introcdc.mapmeelv3.commands.CommandWorldTeleport;
-import br.com.introcdc.mapmeelv3.listeners.BlockDamage;
-import br.com.introcdc.mapmeelv3.listeners.BlockPlace;
-import br.com.introcdc.mapmeelv3.listeners.ChatEvent;
-import br.com.introcdc.mapmeelv3.listeners.CommandPreProcess;
-import br.com.introcdc.mapmeelv3.listeners.DamageEvent;
-import br.com.introcdc.mapmeelv3.listeners.DeathRespawn;
-import br.com.introcdc.mapmeelv3.listeners.EntitySpawn;
-import br.com.introcdc.mapmeelv3.listeners.InteractEvent;
-import br.com.introcdc.mapmeelv3.listeners.InventoryClick;
-import br.com.introcdc.mapmeelv3.listeners.LeaveJoin;
-import br.com.introcdc.mapmeelv3.listeners.MotdEvent;
-import br.com.introcdc.mapmeelv3.listeners.MoveEvent;
-import br.com.introcdc.mapmeelv3.listeners.NPCClick;
-import br.com.introcdc.mapmeelv3.listeners.WorldEvents;
-import br.com.introcdc.mapmeelv3.overwatch.CoreOverwatch;
-import br.com.introcdc.mapmeelv3.variables.Strings;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MapMeelMain extends JavaPlugin {
 
@@ -140,6 +97,9 @@ public class MapMeelMain extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(Strings.prefix + "§a§lVersão (Bukkit): §f§l" + Bukkit.getServer().getBukkitVersion());
         Bukkit.getConsoleSender().sendMessage(Strings.prefix + "§2§l§m==============================");
 
+        Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "kindome:pm");
+
         ArrayList<World> worlds = new ArrayList<>();
         worlds.add(Bukkit.getWorld("world"));
         worlds.add(Bukkit.getWorld("world_nether"));
@@ -147,7 +107,7 @@ public class MapMeelMain extends JavaPlugin {
 
         for (World world : worlds) {
             for (Entity entity : world.getEntities()) {
-                if (entity.getType().equals(EntityType.PRIMED_TNT) || entity instanceof TNTPrimed || entity.getType().equals(EntityType.ENDER_CRYSTAL) || entity instanceof EnderCrystal || entity.getType().equals(EntityType.SPLASH_POTION) || entity instanceof Explosive || entity instanceof ExplosiveMinecart || entity instanceof Wither || entity instanceof WitherSkull || entity instanceof Fireball || entity instanceof Enderman || entity instanceof Creeper || entity instanceof Item) {
+                if (entity.getType().equals(EntityType.PRIMED_TNT) || entity instanceof TNTPrimed || entity.getType().equals(EntityType.ENDER_CRYSTAL) || entity instanceof EnderCrystal || entity.getType().equals(EntityType.SPLASH_POTION) || entity instanceof Explosive || entity instanceof ExplosiveMinecart || entity instanceof Wither || entity instanceof Fireball || entity instanceof Enderman || entity instanceof Creeper || entity instanceof Item) {
                     entity.remove();
                 }
             }
@@ -211,6 +171,7 @@ public class MapMeelMain extends JavaPlugin {
 
         new BukkitRunnable() {
             int times = 0;
+
             @Override
             public void run() {
                 Player player = Bukkit.getPlayer("SerjaoBirrantage");

@@ -1,7 +1,7 @@
 package br.com.introcdc.mapmeelv3;
 
-import java.util.Random;
-
+import br.com.introcdc.mapmeelv3.listeners.MoveEvent;
+import br.com.introcdc.mapmeelv3.variables.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -10,8 +10,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import br.com.introcdc.mapmeelv3.listeners.MoveEvent;
-import br.com.introcdc.mapmeelv3.variables.Strings;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.Random;
 
 public class MapFinal {
 
@@ -135,6 +137,17 @@ public class MapFinal {
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "warp Plataforma" + p.getName());
                     Utils.sendTitle(p, "§2§lParabéns!", "§oVocê finalizou o §5§oMapMeel v3§f§o com sucesso!", 20, 100, 20);
                     p.sendMessage(Strings.prefix + "§2§lParabéns! §f§oVocê finalizou o §5§oMapMeel v3§f§o com sucesso!");
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            for (Player player : Bukkit.getOnlinePlayers()) {
+                                sendPluginMessage(player, "MapMeelv3Complete");
+                                sendPlayer(player, "KitPvP");
+                            }
+                        }
+                    }.runTaskLater(MapMeelMain.getPlugin(), 200);
+
                     p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 50000, 1);
                     Bukkit.getWorld("world").setTime(6000);
                     if (Utils.isMeelOn()) {
@@ -149,6 +162,22 @@ public class MapFinal {
                 }
             }
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
+    }
+
+    public static void sendPlayer(Player player, String server) {
+        sendPluginMessage(player, "Connect", server);
+    }
+
+    public static void sendPluginMessage(Player player, String... messages) {
+        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+        DataOutputStream output = new DataOutputStream(byteArray);
+        try {
+            for (String message : messages) {
+                output.writeUTF(message);
+            }
+        } catch (IOException ignored) {
+        }
+        player.sendPluginMessage(MapMeelMain.getPlugin(), "kindome:pm", byteArray.toByteArray());
     }
 
     public static void event2(Player p) {
