@@ -103,13 +103,7 @@ public class CommandAudio implements CommandExecutor {
                         Utils.playSound(p, audio);
                     }
                     if (audio.equals(Audio.PARAR)) {
-                        sender.sendMessage(Strings.prefix + "쬯Parando...");
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                sender.sendMessage(Strings.prefix + "쬯햡dio parado com sucesso!");
-                            }
-                        }.runTaskLater(MapMeelMain.getPlugin(), 20L);
+                        sender.sendMessage(Strings.prefix + "쬯햡dios parados...");
                     } else {
                         sender.sendMessage(Strings.prefix + "쬯Executando...");
                     }
@@ -148,13 +142,7 @@ public class CommandAudio implements CommandExecutor {
                     } else {
                         Utils.playSound(pl, audio);
                         if (audio.equals(Audio.PARAR)) {
-                            sender.sendMessage(Strings.prefix + "쬯Parando...");
-                            new BukkitRunnable() {
-                                @Override
-                                public void run() {
-                                    sender.sendMessage(Strings.prefix + "쬯햡dio parado com sucesso!");
-                                }
-                            }.runTaskLater(MapMeelMain.getPlugin(), 20L);
+                            sender.sendMessage(Strings.prefix + "쬯햡dio parado!");
                         } else {
                             sender.sendMessage(Strings.prefix + "쬯Executando...");
                         }

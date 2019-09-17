@@ -1,24 +1,13 @@
 package br.com.introcdc.mapmeelv3.listeners;
 
-import java.io.File;
-import java.util.ArrayList;
-
+import br.com.introcdc.mapmeelv3.*;
+import br.com.introcdc.mapmeelv3.overwatch.CoreOverwatch;
+import br.com.introcdc.mapmeelv3.variables.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.World;
-import org.bukkit.entity.Creeper;
-import org.bukkit.entity.EnderCrystal;
-import org.bukkit.entity.Enderman;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Explosive;
-import org.bukkit.entity.Fireball;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.TNTPrimed;
-import org.bukkit.entity.Wither;
-import org.bukkit.entity.WitherSkull;
+import org.bukkit.entity.*;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,17 +15,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import br.com.introcdc.mapmeelv3.Cargo;
-import br.com.introcdc.mapmeelv3.CheckpointManager;
-import br.com.introcdc.mapmeelv3.MapMeelMain;
-import br.com.introcdc.mapmeelv3.Profile;
-import br.com.introcdc.mapmeelv3.ScoreManager;
-import br.com.introcdc.mapmeelv3.Updater;
-import br.com.introcdc.mapmeelv3.Utils;
-import br.com.introcdc.mapmeelv3.overwatch.CoreOverwatch;
-import br.com.introcdc.mapmeelv3.variables.Strings;
+import java.io.File;
+import java.util.ArrayList;
 
 public class LeaveJoin implements Listener {
 
@@ -57,7 +40,7 @@ public class LeaveJoin implements Listener {
 
         for (World world : worlds) {
             for (Entity entity : world.getEntities()) {
-                if (entity.getType().equals(EntityType.PRIMED_TNT) || entity instanceof TNTPrimed || entity.getType().equals(EntityType.ENDER_CRYSTAL) || entity instanceof EnderCrystal || entity.getType().equals(EntityType.SPLASH_POTION) || entity instanceof Explosive || entity instanceof ExplosiveMinecart || entity instanceof Wither || entity instanceof WitherSkull || entity instanceof Fireball || entity instanceof Enderman || entity instanceof Creeper || entity instanceof Item) {
+                if (entity.getType().equals(EntityType.PRIMED_TNT) || entity instanceof TNTPrimed || entity.getType().equals(EntityType.ENDER_CRYSTAL) || entity instanceof EnderCrystal || entity.getType().equals(EntityType.SPLASH_POTION) || entity instanceof Explosive || entity instanceof ExplosiveMinecart || entity instanceof Wither || entity instanceof Fireball || entity instanceof Enderman || entity instanceof Creeper || entity instanceof Item) {
                     entity.remove();
                 }
             }
@@ -141,9 +124,10 @@ public class LeaveJoin implements Listener {
             @Override
             public void run() {
                 event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.BLOCK_NOTE_BASS, 1, 50000);
+                event.getPlayer().setResourcePack("http://local.introbase64.com.br:8080/MapMeelv3Texture.zip");
                 event.getPlayer().sendMessage(Strings.cmsPrefix + "§cEste servidor está protegido com o §4§LCMS §cv. 1.0 (Custom Map Security) - Custom Build for 'MapMeel v3'");
-                event.getPlayer().sendMessage(Strings.prefix + "§fÚltima atualização: §a" + Utils.convertToDate(new File("/var/www/introbase64/assets/template/files/MapMeelv3Texture.zip").lastModified()));
-                event.getPlayer().sendMessage(Strings.prefix + "§fLink para baixar textura atualizada: §a§lhttp://www.mapmeel.com.br/assets/template/files/MapMeelv3Texture.zip");
+                event.getPlayer().sendMessage(Strings.prefix + "§fÚltima atualização: §a" + Utils.convertToDate(new File("/home/introbase64/site/MapMeelv3Texture.zip").lastModified()));
+                event.getPlayer().sendMessage(Strings.prefix + "§fLink para baixar textura atualizada: §a§lhttp://local.introbase64.com.br:8080/MapMeelv3Texture.zip");
                 Utils.checkForPlayAudio(event.getPlayer(), true);
             }
         }.runTaskLater(MapMeelMain.getPlugin(), 100L);

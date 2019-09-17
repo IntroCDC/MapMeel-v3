@@ -134,7 +134,7 @@ public class MapFinal {
                     this.cancel();
                     MapFinal.started = false;
                     Utils.playSound(p, Audio.WIN);
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "warp Plataforma" + p.getName());
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "warp PlataformaFinal " + p.getName());
                     Utils.sendTitle(p, "§2§lParabéns!", "§oVocê finalizou o §5§oMapMeel v3§f§o com sucesso!", 20, 100, 20);
                     p.sendMessage(Strings.prefix + "§2§lParabéns! §f§oVocê finalizou o §5§oMapMeel v3§f§o com sucesso!");
 

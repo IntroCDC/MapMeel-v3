@@ -21,9 +21,6 @@ public class HistoriaMapMeelv3P2 extends HistoriaMapMeelv3 {
     public static void startHistory(Player player) {
         HistoriaMapMeelv3.reloadAllSkins();
 
-        if (HistoriaMapMeelv3.start) {
-            return;
-        }
         HistoriaMapMeelv3.start = true;
 
         HistoriaMapMeelv3.toggleLightsAudience(false);

@@ -106,6 +106,11 @@ public class Portal {
         if (this.nivel != null) {
             this.nivel.setCleared(true);
         }
+
+        if (Portal.this.getName().equalsIgnoreCase("L_FINAL")) {
+            HistoriaMapMeelv3.start = true;
+        }
+
         Portal.portalCoolDown.add(player.getUniqueId());
         player.sendMessage(Strings.prefix + "§eTeleportando...");
         Utils.playSound(player, Audio.PARAR);

@@ -1,18 +1,19 @@
 package br.com.introcdc.mapmeelv3;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Random;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Location;
+import br.com.introcdc.mapmeelv3.listeners.MoveEvent;
+import br.com.introcdc.mapmeelv3.variables.Strings;
+import com.google.common.base.Preconditions;
+import com.sk89q.worldedit.MaxChangedBlocksException;
+import com.sk89q.worldedit.world.DataException;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.npc.skin.SkinnableEntity;
+import net.citizensnpcs.util.NMS;
+import net.minecraft.server.v1_10_R1.*;
+import net.minecraft.server.v1_10_R1.IChatBaseComponent.ChatSerializer;
+import net.minecraft.server.v1_10_R1.PacketPlayOutTitle.EnumTitleAction;
 import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
 import org.bukkit.entity.EntityType;
@@ -21,23 +22,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.google.common.base.Preconditions;
-import com.sk89q.worldedit.MaxChangedBlocksException;
-import com.sk89q.worldedit.world.DataException;
-
-import br.com.introcdc.mapmeelv3.listeners.MoveEvent;
-import br.com.introcdc.mapmeelv3.variables.Strings;
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.npc.skin.SkinnableEntity;
-import net.citizensnpcs.util.NMS;
-import net.minecraft.server.v1_10_R1.EntityPlayer;
-import net.minecraft.server.v1_10_R1.IChatBaseComponent.ChatSerializer;
-import net.minecraft.server.v1_10_R1.MinecraftServer;
-import net.minecraft.server.v1_10_R1.PacketPlayOutChat;
-import net.minecraft.server.v1_10_R1.PacketPlayOutTitle;
-import net.minecraft.server.v1_10_R1.PacketPlayOutTitle.EnumTitleAction;
-import net.minecraft.server.v1_10_R1.PlayerConnection;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Random;
 
 public class Utils {
 
@@ -162,7 +152,7 @@ public class Utils {
         StringBuilder tps = new StringBuilder();
         String message;
         for (int i = 0; i < 4; i++) {
-            tps.append(String.valueOf(String.valueOf(MinecraftServer.getServer().recentTps[0]).toCharArray()[i]));
+            tps.append(String.valueOf(MinecraftServer.getServer().recentTps[0]).toCharArray()[i]);
         }
         if (MinecraftServer.getServer().recentTps[0] >= 20) {
             message = "§fTPS atual do servidor: §b§l" + tps + "§f (§2Perfeito§f)";
@@ -218,10 +208,10 @@ public class Utils {
     }
 
     public static void loadAllCheckers() {
-        new LevelChecker("LEVEL-1", () -> Bukkit.getWorld("world").getBlockAt(992, 28, 988).setType(Material.REDSTONE_BLOCK), () -> Bukkit.getWorld("world").getBlockAt(992, 28, 988).setType(Material.AIR), new Nivel[] { Nivel.EASTEREGG_1, Nivel.L_1A, Nivel.L_1B, Nivel.L_1C, Nivel.L_1D });
-        new LevelChecker("LEVEL-2", () -> Bukkit.getWorld("world").getBlockAt(2011, 4, 2020).setType(Material.REDSTONE_BLOCK), () -> Bukkit.getWorld("world").getBlockAt(2011, 4, 2020).setType(Material.AIR), new Nivel[] { Nivel.EASTEREGG_2, Nivel.L_2A, Nivel.L_2B, Nivel.L_2C, Nivel.L_2D });
-        new LevelChecker("LEVEL-3", () -> Bukkit.getWorld("world_nether").getBlockAt(558, 73, 409).setType(Material.REDSTONE_BLOCK), () -> Bukkit.getWorld("world_nether").getBlockAt(558, 73, 409).setType(Material.AIR), new Nivel[] { Nivel.EASTEREGG_3, Nivel.L_3A, Nivel.L_3B, Nivel.L_3C, Nivel.L_3D });
-        new LevelChecker("EASTEREGG-4", () -> Bukkit.getWorld("world_the_end").getBlockAt(1937, 59, 2579).setType(Material.REDSTONE_BLOCK), () -> Bukkit.getWorld("world_the_end").getBlockAt(1937, 59, 2579).setType(Material.AIR), new Nivel[] { Nivel.L_4A, Nivel.L_4B, Nivel.L_4C, Nivel.L_4D });
+        new LevelChecker("LEVEL-1", () -> Bukkit.getWorld("world").getBlockAt(992, 28, 988).setType(Material.REDSTONE_BLOCK), () -> Bukkit.getWorld("world").getBlockAt(992, 28, 988).setType(Material.AIR), new Nivel[]{Nivel.EASTEREGG_1, Nivel.L_1A, Nivel.L_1B, Nivel.L_1C, Nivel.L_1D});
+        new LevelChecker("LEVEL-2", () -> Bukkit.getWorld("world").getBlockAt(2011, 4, 2020).setType(Material.REDSTONE_BLOCK), () -> Bukkit.getWorld("world").getBlockAt(2011, 4, 2020).setType(Material.AIR), new Nivel[]{Nivel.EASTEREGG_2, Nivel.L_2A, Nivel.L_2B, Nivel.L_2C, Nivel.L_2D});
+        new LevelChecker("LEVEL-3", () -> Bukkit.getWorld("world_nether").getBlockAt(558, 73, 409).setType(Material.REDSTONE_BLOCK), () -> Bukkit.getWorld("world_nether").getBlockAt(558, 73, 409).setType(Material.AIR), new Nivel[]{Nivel.EASTEREGG_3, Nivel.L_3A, Nivel.L_3B, Nivel.L_3C, Nivel.L_3D});
+        new LevelChecker("EASTEREGG-4", () -> Bukkit.getWorld("world_the_end").getBlockAt(1937, 59, 2579).setType(Material.REDSTONE_BLOCK), () -> Bukkit.getWorld("world_the_end").getBlockAt(1937, 59, 2579).setType(Material.AIR), new Nivel[]{Nivel.L_4A, Nivel.L_4B, Nivel.L_4C, Nivel.L_4D});
         new LevelChecker("FINAL", () -> {
             for (int x = 5; x <= 11; x++) {
                 for (int y = 8; y <= 13; y++) {
@@ -409,7 +399,7 @@ public class Utils {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "playsound " + dialog.getPatch() + " master " + player.getName() + " " + (int) player.getLocation().getX() + " " + (int) player.getLocation().getY() + " " + (int) player.getLocation().getZ() + " 50000 1");
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "playsound " + dialog.getPatch() + " master " + player.getName() + " 0 0 0 50000 1");
                 }
             }.runTaskLater(MapMeelMain.getPlugin(), 20);
         }
@@ -425,22 +415,10 @@ public class Utils {
             }
             return;
         } else {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "playsound " + audio.getPatch() + " master " + player.getName() + " " + (int) player.getLocation().getX() + " " + (int) player.getLocation().getY() + " " + (int) player.getLocation().getZ() + " 50000 1");
+            player.playSound(player.getLocation(), audio.getPatch(), 50000, 1);
         }
         if (audio.equals(Audio.PARAR)) {
-            new BukkitRunnable() {
-                int timer = 0;
-
-                @Override
-                public void run() {
-                    this.timer++;
-                    if (this.timer == 10) {
-                        this.cancel();
-                    } else {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "playsound " + audio.getPatch() + " master " + player.getName() + " " + (int) player.getLocation().getX() + " " + (int) player.getLocation().getY() + " " + (int) player.getLocation().getZ() + " 50000 1");
-                    }
-                }
-            }.runTaskTimer(MapMeelMain.getPlugin(), 0, 2);
+            player.stopSound("");
         }
     }
 
@@ -473,12 +451,11 @@ public class Utils {
         Bukkit.getConsoleSender().sendMessage(Strings.cmsPrefix + "§f§l" + message.replace("&", "§"));
     }
 
-    @SuppressWarnings("JavaReflectionMemberAccess")
     public static void sendTablist(Player player, String Header, String Footer) {
         try {
             Object header = Utils.getNmsClass("IChatBaseComponent$ChatSerializer").getMethod("a", String.class).invoke(null, "{\"text\": \"" + Header + "\"}");
             Object footer = Utils.getNmsClass("IChatBaseComponent$ChatSerializer").getMethod("a", String.class).invoke(null, "{\"text\": \"" + Footer + "\"}");
-            Object ppoplhf = Utils.getNmsClass("PacketPlayOutPlayerListHeaderFooter").getConstructor(new Class[] { Utils.getNmsClass("IChatBaseComponent") }).newInstance(header);
+            Object ppoplhf = Utils.getNmsClass("PacketPlayOutPlayerListHeaderFooter").getConstructor(new Class[]{Utils.getNmsClass("IChatBaseComponent")}).newInstance(header);
             Field f = ppoplhf.getClass().getDeclaredField("b");
             f.setAccessible(true);
             f.set(ppoplhf, footer);
