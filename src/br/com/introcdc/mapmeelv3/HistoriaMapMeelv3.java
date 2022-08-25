@@ -175,7 +175,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCbase62 == null) {
-            HistoriaMapMeelv3.NPCbase62 = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Base62");
+            HistoriaMapMeelv3.NPCbase62 = Utils.createNPC(EntityType.PLAYER, "Base62", null, "Vinheta");
         } else {
             HistoriaMapMeelv3.NPCbase62.despawn();
         }
@@ -184,7 +184,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCbase64 == null) {
-            HistoriaMapMeelv3.NPCbase64 = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Base64_");
+            HistoriaMapMeelv3.NPCbase64 = Utils.createNPC(EntityType.PLAYER, "Base64", null, "Intro_GamerHD");
         } else {
             HistoriaMapMeelv3.NPCbase64.despawn();
         }
@@ -193,7 +193,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCbase65 == null) {
-            HistoriaMapMeelv3.NPCbase65 = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Base65");
+            HistoriaMapMeelv3.NPCbase65 = Utils.createNPC(EntityType.PLAYER, "Base65", null, "IntroCDC");
         } else {
             HistoriaMapMeelv3.NPCbase65.despawn();
         }
@@ -427,17 +427,17 @@ public class HistoriaMapMeelv3 {
             HistoriaMapMeelv3.NPCroberta.despawn();
         }
         if (HistoriaMapMeelv3.NPCbase62 == null) {
-            HistoriaMapMeelv3.NPCbase62 = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Base62");
+            HistoriaMapMeelv3.NPCbase62 = Utils.createNPC(EntityType.PLAYER, "Base62", null, "Vinheta");
         } else {
             HistoriaMapMeelv3.NPCbase62.despawn();
         }
         if (HistoriaMapMeelv3.NPCbase64 == null) {
-            HistoriaMapMeelv3.NPCbase64 = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Base64_");
+            HistoriaMapMeelv3.NPCbase64 = Utils.createNPC(EntityType.PLAYER, "Base64", null, "Intro_GamerHD");
         } else {
             HistoriaMapMeelv3.NPCbase64.despawn();
         }
         if (HistoriaMapMeelv3.NPCbase65 == null) {
-            HistoriaMapMeelv3.NPCbase65 = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Base65");
+            HistoriaMapMeelv3.NPCbase65 = Utils.createNPC(EntityType.PLAYER, "Base65", null, "IntroCDC");
         } else {
             HistoriaMapMeelv3.NPCbase65.despawn();
         }

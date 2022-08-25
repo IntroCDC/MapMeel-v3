@@ -93,7 +93,9 @@ public class Utils {
                 skinnable.setSkinName(skin);
             }
         }
-        npc.spawn(location);
+        if (location != null) {
+            npc.spawn(location);
+        }
         return npc;
     }
 
@@ -246,39 +248,39 @@ public class Utils {
     }
 
     public static void loadBots() {
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), 0.5, 19.0, 20.5), DialogBot.SEJA_BEM_VINDA);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), 991.5, 30.0, 991.5), DialogBot.LEVEL_1_LOBBY);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), 1500.5, 32.0, 1010.5), DialogBot.LEVEL_1_1C);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), 1498.5, 7.0, 931.5), DialogBot.OLA);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), 1998.5, 30.0, 1002.5), DialogBot.LEVEL_1_1D);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), -999.5, 30.0, -1002.5), null);
-        new Bot("Base64_", new Location(Bukkit.getWorld("world"), -1001.5, 30.0, -1002.5), DialogBot.LEVEL_1_EASTEREGG_1);
-        new Bot("Base65", new Location(Bukkit.getWorld("world"), -997.5, 36.0, -1085.5), DialogBot.LEVEL_1_EASTEREGG_2);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), -997.5, 42.0, -1089.5), DialogBot.LEVEL_1_EASTEREGG_3);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), -997.5, 36.0, -1095.5), DialogBot.LEVEL_1_EASTEREGG_4);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), 1958.5, 53.0, 1963.5), DialogBot.LEVEL_2_LOBBY);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), 2059.5, 51.0, 1967.5), DialogBot.OLA);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), 3100.5, 14.0, 3104.5), DialogBot.LEVEL_2_2B);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), 5011.5, 31.0, 4948.5), DialogBot.LEVEL_2_EASTEREGG_1);
-        new Bot("Base62", new Location(Bukkit.getWorld("world"), 5054.5, 31.0, 4874.5), DialogBot.LEVEL_2_EASTEREGG_2);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_nether"), 498.5, 74.0, 414.5), DialogBot.LEVEL_3_LOBBY);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_nether"), 456.5, 91.0, 683.5), DialogBot.LEVEL_3_3B1);
-        new Bot("Base64_", new Location(Bukkit.getWorld("world_nether"), 395.5, 85.0, 738.5), DialogBot.LEVEL_3_3B);
-        new Bot("Base64_", new Location(Bukkit.getWorld("world_nether"), 4876.5, 59.0, 4707.5), DialogBot.LEVEL_3_E_1);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_nether"), 4978.5, 60.0, 4710.5), DialogBot.LEVEL_3_E_R1);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_nether"), 5003.5, 59.0, 4709.5), DialogBot.LEVEL_3_E_R2);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_nether"), 5022.5, 59.0, 4709.5), DialogBot.LEVEL_3_E_R3);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_nether"), 4978.5, 67.0, 4672.5), DialogBot.LEVEL_3_E_R4);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_nether"), 4975.5, 64.0, 4688.5), DialogBot.LEVEL_3_E_R5);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_nether"), 4923.5, 53.0, 4689.5), DialogBot.LEVEL_3_E_R6);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_nether"), 5003.5, 67.0, 4644.5), DialogBot.LEVEL_3_E_R7);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_the_end"), 1859.5, 64.0, 2071.5), DialogBot.LEVEL_4_LOBBY);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_the_end"), 1757.5, 241.0, 1743.5), DialogBot.LEVEL_4_4B);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_the_end"), 2390.5, 53.0, 2147.5), DialogBot.BOA_SORTE);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_the_end"), 2395.5, 105.0, 2176.5), DialogBot.ZERAR_VIDA);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_the_end"), 4129.5, 64.0, 3387.5), DialogBot.LEVEL_4_4D);
-        new Bot("Base62", new Location(Bukkit.getWorld("world_the_end"), 5808.5, 58.0, 4950.5), DialogBot.LEVEL_4_EASTEREGG_1);
-        new Bot("Base65", new Location(Bukkit.getWorld("world_the_end"), 5796.5, 57.0, 4892.5), DialogBot.LEVEL_4_EASTEREGG_2);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), 0.5, 19.0, 20.5), DialogBot.SEJA_BEM_VINDA);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), 991.5, 30.0, 991.5), DialogBot.LEVEL_1_LOBBY);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), 1500.5, 32.0, 1010.5), DialogBot.LEVEL_1_1C);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), 1498.5, 7.0, 931.5), DialogBot.OLA);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), 1998.5, 30.0, 1002.5), DialogBot.LEVEL_1_1D);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), -999.5, 30.0, -1002.5), null);
+        new Bot("Base64", "Intro_GamerHD", new Location(Bukkit.getWorld("world"), -1001.5, 30.0, -1002.5), DialogBot.LEVEL_1_EASTEREGG_1);
+        new Bot("Base65", "IntroCDC", new Location(Bukkit.getWorld("world"), -997.5, 36.0, -1085.5), DialogBot.LEVEL_1_EASTEREGG_2);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), -997.5, 42.0, -1089.5), DialogBot.LEVEL_1_EASTEREGG_3);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), -997.5, 36.0, -1095.5), DialogBot.LEVEL_1_EASTEREGG_4);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), 1958.5, 53.0, 1963.5), DialogBot.LEVEL_2_LOBBY);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), 2059.5, 51.0, 1967.5), DialogBot.OLA);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), 3100.5, 14.0, 3104.5), DialogBot.LEVEL_2_2B);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), 5011.5, 31.0, 4948.5), DialogBot.LEVEL_2_EASTEREGG_1);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world"), 5054.5, 31.0, 4874.5), DialogBot.LEVEL_2_EASTEREGG_2);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_nether"), 498.5, 74.0, 414.5), DialogBot.LEVEL_3_LOBBY);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_nether"), 456.5, 91.0, 683.5), DialogBot.LEVEL_3_3B1);
+        new Bot("Base64", "Intro_GamerHD", new Location(Bukkit.getWorld("world_nether"), 395.5, 85.0, 738.5), DialogBot.LEVEL_3_3B);
+        new Bot("Base64", "Intro_GamerHD", new Location(Bukkit.getWorld("world_nether"), 4876.5, 59.0, 4707.5), DialogBot.LEVEL_3_E_1);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_nether"), 4978.5, 60.0, 4710.5), DialogBot.LEVEL_3_E_R1);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_nether"), 5003.5, 59.0, 4709.5), DialogBot.LEVEL_3_E_R2);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_nether"), 5022.5, 59.0, 4709.5), DialogBot.LEVEL_3_E_R3);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_nether"), 4978.5, 67.0, 4672.5), DialogBot.LEVEL_3_E_R4);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_nether"), 4975.5, 64.0, 4688.5), DialogBot.LEVEL_3_E_R5);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_nether"), 4923.5, 53.0, 4689.5), DialogBot.LEVEL_3_E_R6);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_nether"), 5003.5, 67.0, 4644.5), DialogBot.LEVEL_3_E_R7);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_the_end"), 1859.5, 64.0, 2071.5), DialogBot.LEVEL_4_LOBBY);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_the_end"), 1757.5, 241.0, 1743.5), DialogBot.LEVEL_4_4B);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_the_end"), 2390.5, 53.0, 2147.5), DialogBot.BOA_SORTE);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_the_end"), 2395.5, 105.0, 2176.5), DialogBot.ZERAR_VIDA);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_the_end"), 4129.5, 64.0, 3387.5), DialogBot.LEVEL_4_4D);
+        new Bot("Base62", "Vinheta", new Location(Bukkit.getWorld("world_the_end"), 5808.5, 58.0, 4950.5), DialogBot.LEVEL_4_EASTEREGG_1);
+        new Bot("Base65", "IntroCDC", new Location(Bukkit.getWorld("world_the_end"), 5796.5, 57.0, 4892.5), DialogBot.LEVEL_4_EASTEREGG_2);
     }
 
     public static void loadCheckpoints() throws MaxChangedBlocksException, DataException, IOException {

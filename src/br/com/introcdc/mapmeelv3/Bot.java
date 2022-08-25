@@ -30,15 +30,16 @@ public class Bot {
     private int id;
     private Location location;
     private String nick;
+    private String skin;
 
     private NPC npc;
 
-    public Bot(String nick, Location location, DialogBot dialog) {
+    public Bot(String nick, String skin, Location location, DialogBot dialog) {
         this.nick = nick;
+        this.skin = skin;
         this.location = location;
         this.dialog = dialog;
-        this.npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, nick);
-        this.npc.spawn(location);
+        this.npc = Utils.createNPC(EntityType.PLAYER, nick, location, skin);
         this.id = this.npc.getId();
         if (!Bot.getBots().containsKey(this.id)) {
             Bot.bots.put(this.id, this);
