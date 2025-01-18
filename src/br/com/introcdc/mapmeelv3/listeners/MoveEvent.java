@@ -52,7 +52,7 @@ public class MoveEvent implements Listener {
             }
         }
         for (String ss : Portal.getPortais().keySet()) {
-            if (Portal.getPortais().get(ss).getLocation().getWorld().equals(event.getPlayer().getWorld())) {
+            if (Portal.getPortais().get(ss).getLocation().getWorld().getName().equals(event.getPlayer().getWorld().getName())) {
                 if (Portal.getPortais().get(ss).getLocation().clone().add(0, 2, 0).distance(event.getPlayer().getLocation()) <= 1) {
                     if (!Profile.getProfile(event.getPlayer().getName()).getLocation().getName().equalsIgnoreCase(Warp.FINAL.getName())) {
                         if (Utils.isMeelOn()) {

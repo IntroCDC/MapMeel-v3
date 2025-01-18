@@ -1,5 +1,9 @@
 package br.com.introcdc.mapmeelv3.listeners;
 
+import br.com.introcdc.mapmeelv3.MapMeelMain;
+import br.com.introcdc.mapmeelv3.Portal;
+import br.com.introcdc.mapmeelv3.Utils;
+import br.com.introcdc.mapmeelv3.variables.Strings;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -7,17 +11,16 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import br.com.introcdc.mapmeelv3.MapMeelMain;
-import br.com.introcdc.mapmeelv3.Portal;
-import br.com.introcdc.mapmeelv3.Utils;
-import br.com.introcdc.mapmeelv3.variables.Strings;
-
 public class DamageEvent implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
+            if (event.getCause() == DamageCause.ENTITY_ATTACK) {
+                event.setCancelled(true);
+                return;
+            }
             if (MoveEvent.spongeInvenciliby.contains(player.getUniqueId())) {
                 event.setCancelled(true);
                 MoveEvent.spongeInvenciliby.remove(player.getUniqueId());

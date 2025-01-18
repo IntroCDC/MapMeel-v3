@@ -66,36 +66,33 @@ public class CommandWarp implements CommandExecutor {
                 }.runTaskLater(MapMeelMain.getPlugin(), 20);
             }
         } else {
-            if (Bukkit.getPlayer(args[1]) == null) {
-                sender.sendMessage(Strings.prefix + "§cEste jogador está offline!");
-                return false;
-            }
-            Player p = Bukkit.getPlayer(args[1]);
-            if (sender instanceof Player) {
-                if (Utils.isMeelOn()) {
-                    if (Utils.getMeel().getName().equalsIgnoreCase(p.getName())) {
-                        return false;
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                if (sender instanceof Player) {
+                    if (Utils.isMeelOn()) {
+                        if (Utils.getMeel().getName().equalsIgnoreCase(p.getName())) {
+                            return false;
+                        }
+                    }
+                } else {
+                    if (Utils.isMeelOn()) {
+                        if (Utils.getMeel().getName().equalsIgnoreCase(p.getName())) {
+                            MoveEvent.teleporting = true;
+                        }
                     }
                 }
-            } else {
-                if (Utils.isMeelOn()) {
-                    if (Utils.getMeel().getName().equalsIgnoreCase(p.getName())) {
-                        MoveEvent.teleporting = true;
-                    }
+                p.teleport(warp.getLocation());
+                Profile.getProfile(p.getName()).setLocation(warp);
+                CheckpointManager.resetCurrentCheckPoint(p);
+                sender.sendMessage(Strings.prefix + "§fVocê teleportou §a" + p.getName() + "§f para a warp §a" + warp.getName() + "§f com sucesso!");
+                if (Profile.getProfile(p.getName()).isAudioFundoOn()) {
+                    Utils.playSound(p, Audio.PARAR);
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            Utils.playSound(p, Profile.getProfile(p.getName()).getLocation().getFundo());
+                        }
+                    }.runTaskLater(MapMeelMain.getPlugin(), 20);
                 }
-            }
-            p.teleport(warp.getLocation());
-            Profile.getProfile(p.getName()).setLocation(warp);
-            CheckpointManager.resetCurrentCheckPoint(p);
-            sender.sendMessage(Strings.prefix + "§fVocê teleportou §a" + p.getName() + "§f para a warp §a" + warp.getName() + "§f com sucesso!");
-            if (Profile.getProfile(p.getName()).isAudioFundoOn()) {
-                Utils.playSound(p, Audio.PARAR);
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        Utils.playSound(p, Profile.getProfile(p.getName()).getLocation().getFundo());
-                    }
-                }.runTaskLater(MapMeelMain.getPlugin(), 20);
             }
         }
         return false;

@@ -87,14 +87,12 @@ public class Utils {
 
     public static NPC createNPC(EntityType type, String name, Location location, String skin) {
         NPC npc = CitizensAPI.getNPCRegistry().createNPC(type, name);
-        if (skin != null) {
+        npc.spawn(location);
+        if (skin != null && npc != null && npc.getEntity() != null) {
             SkinnableEntity skinnable = NMS.getSkinnable(npc.getEntity());
             if (skinnable != null) {
                 skinnable.setSkinName(skin);
             }
-        }
-        if (location != null) {
-            npc.spawn(location);
         }
         return npc;
     }
