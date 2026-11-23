@@ -124,10 +124,11 @@ public class LeaveJoin implements Listener {
             @Override
             public void run() {
                 event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.BLOCK_NOTE_BASS, 1, 50000);
-                event.getPlayer().setResourcePack("http://www.introbase64.com.br/MapMeelv3Texture.zip");
+                String resourcePack = "http://introbase64.introcdc.com/MapMeelv3Texture.zip";
+                event.getPlayer().setResourcePack(resourcePack);
                 event.getPlayer().sendMessage(Strings.cmsPrefix + "§cEste servidor está protegido com o §4§LCMS §cv. 1.0 (Custom Map Security) - Custom Build for 'MapMeel v3'");
                 event.getPlayer().sendMessage(Strings.prefix + "§fÚltima atualização: §a" + Utils.convertToDate(new File("F:/IntroBase64/MapMeelv3Texture.zip").lastModified()));
-                event.getPlayer().sendMessage(Strings.prefix + "§fLink para baixar textura atualizada: §a§lhttp://www.introbase64.com.br/MapMeelv3Texture.zip");
+                event.getPlayer().sendMessage(Strings.prefix + "§fLink para baixar textura atualizada: §a§l" + resourcePack);
                 Utils.checkForPlayAudio(event.getPlayer(), true);
             }
         }.runTaskLater(MapMeelMain.getPlugin(), 100L);
@@ -210,6 +211,7 @@ public class LeaveJoin implements Listener {
             CoreOverwatch.stopRecording();
         }
         Profile.unloadProfile(event.getPlayer().getName());
+        Profile.saveIfDirty();
     }
 
 }

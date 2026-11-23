@@ -1,30 +1,24 @@
 package br.com.introcdc.mapmeelv3;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.UUID;
-
+import br.com.introcdc.mapmeelv3.listeners.MoveEvent;
+import br.com.introcdc.mapmeelv3.overwatch.CoreOverwatch;
+import br.com.introcdc.mapmeelv3.variables.Strings;
+import com.sk89q.worldedit.CuboidClipboard;
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.world.DataException;
+import de.inventivegames.hologram.Hologram;
+import de.inventivegames.hologram.HologramAPI;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import com.sk89q.worldedit.CuboidClipboard;
-import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.MaxChangedBlocksException;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldedit.world.DataException;
-
-import br.com.introcdc.mapmeelv3.listeners.MoveEvent;
-import br.com.introcdc.mapmeelv3.overwatch.CoreOverwatch;
-import br.com.introcdc.mapmeelv3.variables.Strings;
-import de.inventivegames.hologram.Hologram;
-import de.inventivegames.hologram.HologramAPI;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 public class Portal {
 
@@ -43,6 +37,7 @@ public class Portal {
     private Location location;
     private String name;
     private Nivel nivel;
+    private String warpName;
 
     public Portal(String name, Location destino, Location location, Nivel nivel) throws MaxChangedBlocksException, DataException, IOException {
         this.name = name;
@@ -78,22 +73,39 @@ public class Portal {
         cc.paste(es, origin, true);
         for (Warp warp : Warp.values()) {
             if (warp.getLocation().equals(this.getDestino())) {
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        if (Portal.this.getHologram() == null) {
-                            Portal.this.hologram = HologramAPI.createHologram(Portal.this.location.clone().add(0, 5, 0), "§f§lDestino: §a§l" + warp.getName());
-                        }
-                        if (Portal.this.hologram.isSpawned()) {
-                            Portal.this.hologram.despawn();
-                        }
-                        if (!Portal.this.hologram.isSpawned()) {
-                            Portal.this.hologram.spawn();
-                        }
-                    }
-                }.runTaskTimer(MapMeelMain.getPlugin(), 3 * 20, 10 * 20);
+                this.warpName = warp.getName();
+                break;
             }
         }
+    }
+
+    /**
+     * Antes cada portal tinha a própria tarefa de holograma. Agora é uma tarefa só
+     * e só re-spawna os hologramas que têm jogador perto.
+     */
+    public static void startTasks() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Portal portal : Portal.getPortais().values()) {
+                    if (portal.warpName == null) {
+                        continue;
+                    }
+                    if (portal.hologram == null) {
+                        portal.hologram = HologramAPI.createHologram(portal.location.clone().add(0, 5, 0), "§f§lDestino: §a§l" + portal.warpName);
+                        portal.hologram.spawn();
+                        continue;
+                    }
+                    if (!Checkpoint.hasPlayerNear(portal.getLocation(), 64)) {
+                        continue;
+                    }
+                    if (portal.hologram.isSpawned()) {
+                        portal.hologram.despawn();
+                    }
+                    portal.hologram.spawn();
+                }
+            }
+        }.runTaskTimer(MapMeelMain.getPlugin(), 3 * 20, 10 * 20);
     }
 
     public void teleport(Player player) {

@@ -1,25 +1,24 @@
 package br.com.introcdc.mapmeelv3;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-
+import br.com.introcdc.mapmeelv3.overwatch.CoreOverwatch;
+import br.com.introcdc.mapmeelv3.variables.Strings;
+import com.sk89q.worldedit.CuboidClipboard;
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.world.DataException;
+import de.inventivegames.hologram.Hologram;
+import de.inventivegames.hologram.HologramAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.sk89q.worldedit.CuboidClipboard;
-import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.MaxChangedBlocksException;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldedit.world.DataException;
-
-import br.com.introcdc.mapmeelv3.overwatch.CoreOverwatch;
-import br.com.introcdc.mapmeelv3.variables.Strings;
-import de.inventivegames.hologram.Hologram;
-import de.inventivegames.hologram.HologramAPI;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 
 public class Checkpoint {
 
@@ -76,23 +75,59 @@ public class Checkpoint {
         CuboidClipboard cc = CuboidClipboard.loadSchematic(new File("checkpoint.schematic"));
         com.sk89q.worldedit.Vector origin = new com.sk89q.worldedit.Vector(this.location.getX(), this.location.getY(), this.location.getZ());
         cc.paste(es, origin, true);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                Checkpoint.this.getLocation().getWorld().spawnParticle(Particle.FIREWORKS_SPARK, Checkpoint.this.getLocation().clone().add(0, 1, 0), 1);
+    }
+
+    /**
+     * Retorna true se existir algum jogador online no mesmo mundo a até "radius" blocos.
+     */
+    public static boolean hasPlayerNear(Location location, double radius) {
+        double radiusSquared = radius * radius;
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player.getWorld() != location.getWorld()) {
+                continue;
             }
-        }.runTaskTimer(MapMeelMain.getPlugin(), 3 * 20, 1);
+            if (player.getLocation().distanceSquared(location) <= radiusSquared) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Antes cada checkpoint tinha 2 tarefas próprias (uma rodando a cada tick).
+     * Agora é uma tarefa só para todos, e só trabalha se houver jogador por perto.
+     */
+    public static void startTasks() {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (Checkpoint.this.getHologram() == null) {
-                    Checkpoint.this.hologram = HologramAPI.createHologram(Checkpoint.this.location.clone().add(0, 2, 0), "§a§l§oCheckpoint");
+                if (Bukkit.getOnlinePlayers().isEmpty()) {
+                    return;
                 }
-                if (Checkpoint.this.hologram.isSpawned()) {
-                    Checkpoint.this.hologram.despawn();
+                for (Checkpoint checkpoint : Checkpoint.checkpoints.values()) {
+                    if (Checkpoint.hasPlayerNear(checkpoint.getLocation(), 48)) {
+                        checkpoint.getLocation().getWorld().spawnParticle(Particle.FIREWORKS_SPARK, checkpoint.getLocation().clone().add(0, 1, 0), 1);
+                    }
                 }
-                if (!Checkpoint.this.hologram.isSpawned()) {
-                    Checkpoint.this.hologram.spawn();
+            }
+        }.runTaskTimer(MapMeelMain.getPlugin(), 3 * 20, 2);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Checkpoint checkpoint : Checkpoint.checkpoints.values()) {
+                    if (checkpoint.hologram == null) {
+                        checkpoint.hologram = HologramAPI.createHologram(checkpoint.location.clone().add(0, 2, 0), "§a§l§oCheckpoint");
+                        checkpoint.hologram.spawn();
+                        continue;
+                    }
+                    // Re-spawn apenas dos hologramas com jogador perto (para quem acabou de chegar ver).
+                    if (!Checkpoint.hasPlayerNear(checkpoint.getLocation(), 64)) {
+                        continue;
+                    }
+                    if (checkpoint.hologram.isSpawned()) {
+                        checkpoint.hologram.despawn();
+                    }
+                    checkpoint.hologram.spawn();
                 }
             }
         }.runTaskTimer(MapMeelMain.getPlugin(), 3 * 20, 10 * 20);

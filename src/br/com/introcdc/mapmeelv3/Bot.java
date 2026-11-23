@@ -1,15 +1,13 @@
 package br.com.introcdc.mapmeelv3;
 
-import java.util.HashMap;
-
+import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
+import java.util.HashMap;
 
 public class Bot {
 
@@ -44,7 +42,6 @@ public class Bot {
         if (!Bot.getBots().containsKey(this.id)) {
             Bot.bots.put(this.id, this);
         }
-        this.update();
     }
 
     public DialogBot getDialog() {
@@ -94,33 +91,52 @@ public class Bot {
         }
     }
 
-    public void update() {
+    // Raio em que algum jogador precisa estar para valer a pena virar o NPC.
+    private static final double VIEW_RADIUS_SQUARED = 64 * 64;
+
+    /**
+     * Antes cada bot tinha a própria tarefa (a cada 3 ticks), e cada uma chamava
+     * isMeelOn()/getMeel() percorrendo todos os jogadores. Agora é uma tarefa só,
+     * a Meel é calculada uma vez por ciclo e bots sem ninguém por perto são ignorados.
+     */
+    public static void startUpdater() {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (Bukkit.getOnlinePlayers().size() >= 1) {
-                    Player p = null;
-                    double distancia = 10000000;
-                    for (Player pl : Bukkit.getOnlinePlayers()) {
-                        if (!pl.getWorld().equals(Bot.this.location.getWorld())) {
-                            continue;
-                        }
-                        if (pl.getLocation().distance(Bot.this.location) <= distancia) {
-                            p = pl;
-                            distancia = pl.getLocation().distance(Bot.this.location);
-                        }
-                    }
-                    if (Utils.isMeelOn()) {
-                        if (Utils.getMeel().getWorld().equals(Bot.this.location.getWorld())) {
-                            p = Utils.getMeel();
-                        }
-                    }
-                    if (p != null) {
-                        Bot.this.npc.faceLocation(p.getLocation());
-                    }
+                if (Bukkit.getOnlinePlayers().isEmpty()) {
+                    return;
+                }
+                Player meel = Utils.getMeel();
+                for (Bot bot : Bot.bots.values()) {
+                    bot.faceNearest(meel);
                 }
             }
         }.runTaskTimer(MapMeelMain.getPlugin(), 0, 3);
+    }
+
+    private void faceNearest(Player meel) {
+        if (this.npc == null || !this.npc.isSpawned()) {
+            return;
+        }
+        Player p = null;
+        double distancia = Double.MAX_VALUE;
+        for (Player pl : Bukkit.getOnlinePlayers()) {
+            if (pl.getWorld() != this.location.getWorld()) {
+                continue;
+            }
+            double d = pl.getLocation().distanceSquared(this.location);
+            if (d <= distancia) {
+                p = pl;
+                distancia = d;
+            }
+        }
+        if (p == null || distancia > Bot.VIEW_RADIUS_SQUARED) {
+            return;
+        }
+        if (meel != null && meel.getWorld() == this.location.getWorld()) {
+            p = meel;
+        }
+        this.npc.faceLocation(p.getLocation());
     }
 
 }

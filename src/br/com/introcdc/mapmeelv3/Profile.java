@@ -1,12 +1,28 @@
 package br.com.introcdc.mapmeelv3;
 
-import java.util.HashMap;
-
 import org.bukkit.Bukkit;
+
+import java.util.HashMap;
 
 public class Profile {
 
     private static HashMap<String, Profile> profiles = new HashMap<>();
+
+    // Evita salvar o config.yml no disco a cada alteração (antes era a cada segundo por jogador).
+    // As alterações ficam em memória e são gravadas periodicamente / ao sair / ao desligar.
+    private static boolean dirty = false;
+
+    public static void markDirty() {
+        Profile.dirty = true;
+    }
+
+    public static void saveIfDirty() {
+        if (!Profile.dirty) {
+            return;
+        }
+        Profile.dirty = false;
+        MapMeelMain.getPlugin().saveConfig();
+    }
 
     public static Profile getProfile(String name) {
         if (Profile.getProfiles().containsKey(name)) {
@@ -84,7 +100,7 @@ public class Profile {
     public void addFail() {
         this.fails++;
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".Fails", this.fails);
-        MapMeelMain.getPlugin().saveConfig();
+        Profile.markDirty();
     }
 
     public void addTime() {
@@ -127,24 +143,24 @@ public class Profile {
     public void setAudioFundoEnable(boolean audioFundo) {
         this.audioFundo = audioFundo;
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".audioFundo", audioFundo);
-        MapMeelMain.getPlugin().saveConfig();
+        Profile.markDirty();
     }
 
     public void setCargo(Cargo cargo) {
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".Cargo", cargo.getName());
-        MapMeelMain.getPlugin().saveConfig();
+        Profile.markDirty();
         this.cargo = cargo;
     }
 
     public void setColor(String color) {
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".Color", color.replace("§", "&"));
-        MapMeelMain.getPlugin().saveConfig();
+        Profile.markDirty();
         this.color = color;
     }
 
     public void setFlySpeed(double flySpeed) {
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".flySpeed", flySpeed);
-        MapMeelMain.getPlugin().saveConfig();
+        Profile.markDirty();
         this.flySpeed = flySpeed;
         if (Bukkit.getPlayer(this.name) != null) {
             Bukkit.getPlayer(this.name).setFlySpeed((float) flySpeed);
@@ -154,13 +170,13 @@ public class Profile {
     public void setLocation(Warp location) {
         this.location = location;
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".Location", location.getName());
-        MapMeelMain.getPlugin().saveConfig();
+        Profile.markDirty();
     }
 
     public void setTime(int time) {
         this.time = time;
         MapMeelMain.getPlugin().getConfig().set("Profiles." + this.name + ".time", time);
-        MapMeelMain.getPlugin().saveConfig();
+        Profile.markDirty();
     }
 
 }

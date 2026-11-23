@@ -28,6 +28,7 @@ public class MapMeelMain extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Profile.saveIfDirty();
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.sendMessage(Strings.prefix + "§4§l§m==============================");
             player.sendMessage(Strings.prefix + "§c§lStatus: §f§lPlugin descarregado com sucesso!");
@@ -57,6 +58,15 @@ public class MapMeelMain extends JavaPlugin {
         MapMeelMain.plugin.saveConfig();
         Updater.update();
         Updater.updateSoundMaps();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Profile.saveIfDirty();
+            }
+        }.runTaskTimer(MapMeelMain.plugin, 60 * 20, 60 * 20);
+        Bot.startUpdater();
+        Checkpoint.startTasks();
+        Portal.startTasks();
         this.getCommand("setcargo").setExecutor(new CommandSetCargo());
         this.getCommand("invsee").setExecutor(new CommandInvSee());
         this.getCommand("bloqueador").setExecutor(new CommandBloqueador());

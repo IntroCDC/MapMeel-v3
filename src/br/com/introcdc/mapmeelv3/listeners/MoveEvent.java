@@ -1,10 +1,10 @@
 package br.com.introcdc.mapmeelv3.listeners;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
+import br.com.introcdc.mapmeelv3.*;
+import br.com.introcdc.mapmeelv3.variables.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,15 +14,8 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import br.com.introcdc.mapmeelv3.Audio;
-import br.com.introcdc.mapmeelv3.Cargo;
-import br.com.introcdc.mapmeelv3.Checkpoint;
-import br.com.introcdc.mapmeelv3.MapMeelMain;
-import br.com.introcdc.mapmeelv3.Portal;
-import br.com.introcdc.mapmeelv3.Profile;
-import br.com.introcdc.mapmeelv3.Utils;
-import br.com.introcdc.mapmeelv3.Warp;
-import br.com.introcdc.mapmeelv3.variables.Strings;
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class MoveEvent implements Listener {
 
@@ -33,6 +26,10 @@ public class MoveEvent implements Listener {
 
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
+        // Ignora quando o jogador só girou a câmera (sem mudar de posição): nada abaixo depende disso.
+        if (event.getFrom().getX() == event.getTo().getX() && event.getFrom().getY() == event.getTo().getY() && event.getFrom().getZ() == event.getTo().getZ() && event.getFrom().getWorld() == event.getTo().getWorld()) {
+            return;
+        }
         if (event.getPlayer().getGameMode().equals(GameMode.SPECTATOR)) {
             if (event.getTo().getY() < 0.0) {
                 if (Utils.isMeelOn()) {
@@ -51,9 +48,10 @@ public class MoveEvent implements Listener {
                 Utils.errou(event.getPlayer());
             }
         }
+        Location playerLocation = event.getPlayer().getLocation();
         for (String ss : Portal.getPortais().keySet()) {
-            if (Portal.getPortais().get(ss).getLocation().getWorld().getName().equals(event.getPlayer().getWorld().getName())) {
-                if (Portal.getPortais().get(ss).getLocation().clone().add(0, 2, 0).distance(event.getPlayer().getLocation()) <= 1) {
+            if (Portal.getPortais().get(ss).getLocation().getWorld() == playerLocation.getWorld()) {
+                if (MoveEvent.isWithinOneBlock(Portal.getPortais().get(ss).getLocation(), 2, playerLocation)) {
                     if (!Profile.getProfile(event.getPlayer().getName()).getLocation().getName().equalsIgnoreCase(Warp.FINAL.getName())) {
                         if (Utils.isMeelOn()) {
                             if (event.getPlayer().getName().equalsIgnoreCase(Utils.getMeel().getName())) {
@@ -73,8 +71,8 @@ public class MoveEvent implements Listener {
             }
         }
         for (String ss : Checkpoint.checkpoints.keySet()) {
-            if (Checkpoint.checkpoints.get(ss).getLocation().getWorld().equals(event.getPlayer().getWorld())) {
-                if (Checkpoint.checkpoints.get(ss).getLocation().clone().add(0, 1, 0).distance(event.getPlayer().getLocation()) <= 1) {
+            if (Checkpoint.checkpoints.get(ss).getLocation().getWorld() == playerLocation.getWorld()) {
+                if (MoveEvent.isWithinOneBlock(Checkpoint.checkpoints.get(ss).getLocation(), 1, playerLocation)) {
                     Checkpoint.checkpoints.get(ss).checkpoint(event.getPlayer());
                 }
             }
@@ -147,6 +145,16 @@ public class MoveEvent implements Listener {
                 }.runTaskLater(MapMeelMain.getPlugin(), 100L);
             }
         }
+    }
+
+    /**
+     * Equivale a center.clone().add(0, yOffset, 0).distance(target) <= 1, sem clone() nem raiz quadrada.
+     */
+    private static boolean isWithinOneBlock(Location center, double yOffset, Location target) {
+        double dx = center.getX() - target.getX();
+        double dy = center.getY() + yOffset - target.getY();
+        double dz = center.getZ() - target.getZ();
+        return dx * dx + dy * dy + dz * dz <= 1;
     }
 
     @EventHandler
