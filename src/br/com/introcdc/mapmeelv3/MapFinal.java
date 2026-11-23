@@ -23,6 +23,15 @@ public class MapFinal {
 
     private static int timer = 0;
 
+    // Cada "passo" equivale a 2 ticks (100ms) a 20 TPS. O tempo e medido pelo relogio real,
+    // para o show continuar sincronizado com a musica mesmo se o servidor estiver abaixo de 20 TPS.
+    private static final long STEP_MS = 100L;
+    private static long stageStart = 0L;
+
+    private static int currentStep() {
+        return (int) ((System.currentTimeMillis() - MapFinal.stageStart) / MapFinal.STEP_MS) + 1;
+    }
+
     public static void event1(Player p) {
         p.sendMessage(Strings.prefix + "§fMapa: §aEasterEgg-2");
         p.teleport(HistoriaMapMeelv3.meio);
@@ -31,9 +40,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 135) {
                     this.cancel();
+                    MapFinal.stageStart += 135 * MapFinal.STEP_MS;
                     MapFinal.event2(p);
                 }
             }
@@ -47,9 +57,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 17) {
                     this.cancel();
+                    MapFinal.stageStart += 17 * MapFinal.STEP_MS;
                     MapFinal.event11(p);
                 }
             }
@@ -63,9 +74,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 17) {
                     this.cancel();
+                    MapFinal.stageStart += 17 * MapFinal.STEP_MS;
                     MapFinal.event12(p);
                 }
             }
@@ -79,9 +91,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 270) {
                     this.cancel();
+                    MapFinal.stageStart += 270 * MapFinal.STEP_MS;
                     MapFinal.event13(p);
                 } else {
                     Utils.launchFireworks(special.clone().add(MapFinal.random.nextInt(80) - 40, 5, MapFinal.random.nextInt(80) - 40));
@@ -97,9 +110,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 210) {
                     this.cancel();
+                    MapFinal.stageStart += 210 * MapFinal.STEP_MS;
                     MapFinal.event14(p);
                 }
             }
@@ -113,9 +127,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 140) {
                     this.cancel();
+                    MapFinal.stageStart += 140 * MapFinal.STEP_MS;
                     MapFinal.event15(p);
                 }
             }
@@ -129,9 +144,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 600) {
                     this.cancel();
+                    MapFinal.stageStart += 600 * MapFinal.STEP_MS;
                     MapFinal.started = false;
                     Utils.playSound(p, Audio.WIN);
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "warp PlataformaFinal " + p.getName());
@@ -187,9 +203,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 135) {
                     this.cancel();
+                    MapFinal.stageStart += 135 * MapFinal.STEP_MS;
                     MapFinal.event3(p);
                 }
             }
@@ -203,9 +220,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 140) {
                     this.cancel();
+                    MapFinal.stageStart += 140 * MapFinal.STEP_MS;
                     MapFinal.event4(p);
                 } else {
                     Utils.launchFireworks(special.clone().add(MapFinal.random.nextInt(80) - 40, 5, MapFinal.random.nextInt(80) - 40));
@@ -221,9 +239,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 17) {
                     this.cancel();
+                    MapFinal.stageStart += 17 * MapFinal.STEP_MS;
                     MapFinal.event5(p);
                 }
             }
@@ -237,9 +256,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 17) {
                     this.cancel();
+                    MapFinal.stageStart += 17 * MapFinal.STEP_MS;
                     MapFinal.event6(p);
                 }
             }
@@ -253,9 +273,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 17) {
                     this.cancel();
+                    MapFinal.stageStart += 17 * MapFinal.STEP_MS;
                     MapFinal.event7(p);
                 }
             }
@@ -269,9 +290,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 17) {
                     this.cancel();
+                    MapFinal.stageStart += 17 * MapFinal.STEP_MS;
                     MapFinal.event8(p);
                 }
             }
@@ -285,9 +307,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 17) {
                     this.cancel();
+                    MapFinal.stageStart += 17 * MapFinal.STEP_MS;
                     MapFinal.event9(p);
                 }
             }
@@ -301,9 +324,10 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer > 17) {
                     this.cancel();
+                    MapFinal.stageStart += 17 * MapFinal.STEP_MS;
                     MapFinal.event10(p);
                 }
             }
@@ -321,6 +345,8 @@ public class MapFinal {
             return;
         }
         MapFinal.started = true;
+        // Marca o inicio da musica: todas as etapas sao medidas a partir daqui, em tempo real.
+        MapFinal.stageStart = System.currentTimeMillis();
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "weather rain 180");
         Bukkit.getWorld("world").setTime(16000);
         MapFinal.timer = 0;
@@ -329,7 +355,7 @@ public class MapFinal {
         new BukkitRunnable() {
             @Override
             public void run() {
-                MapFinal.timer++;
+                MapFinal.timer = MapFinal.currentStep();
                 if (MapFinal.timer <= 140) {
                     p.setVelocity(new Vector(0, 0.3f, 0));
                     p.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, p.getLocation().clone().add(5, 0, 5), 10);
@@ -338,6 +364,7 @@ public class MapFinal {
                     p.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, p.getLocation().clone().add(-5, 0, -5), 10);
                 } else {
                     this.cancel();
+                    MapFinal.stageStart += 140 * MapFinal.STEP_MS;
                     MapFinal.event1(p);
                 }
             }

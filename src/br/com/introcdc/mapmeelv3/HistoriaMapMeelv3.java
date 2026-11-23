@@ -1,8 +1,14 @@
 package br.com.introcdc.mapmeelv3;
 
-import java.io.File;
-import java.io.IOException;
-
+import br.com.introcdc.mapmeelv3.variables.Strings;
+import br.com.introcdc.mapmeelv3.variables.TeatroSkins;
+import com.sk89q.worldedit.CuboidClipboard;
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.world.DataException;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,15 +17,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.sk89q.worldedit.CuboidClipboard;
-import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.MaxChangedBlocksException;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldedit.world.DataException;
-
-import br.com.introcdc.mapmeelv3.variables.Strings;
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
+import java.io.File;
+import java.io.IOException;
 
 public class HistoriaMapMeelv3 {
 
@@ -85,7 +84,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCintro == null) {
-            HistoriaMapMeelv3.NPCintro = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Introo");
+            HistoriaMapMeelv3.NPCintro = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.INTRO);
         } else {
             HistoriaMapMeelv3.NPCintro.despawn();
         }
@@ -94,7 +93,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCmeel == null) {
-            HistoriaMapMeelv3.NPCmeel = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "iMeel");
+            HistoriaMapMeelv3.NPCmeel = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.MEEL);
         } else {
             HistoriaMapMeelv3.NPCmeel.despawn();
         }
@@ -103,7 +102,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCbiidu == null) {
-            HistoriaMapMeelv3.NPCbiidu = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Biidu");
+            HistoriaMapMeelv3.NPCbiidu = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.BIIDU);
         } else {
             HistoriaMapMeelv3.NPCbiidu.despawn();
         }
@@ -112,7 +111,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCkeroch == null) {
-            HistoriaMapMeelv3.NPCkeroch = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "iKeroch");
+            HistoriaMapMeelv3.NPCkeroch = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.KEROCH);
         } else {
             HistoriaMapMeelv3.NPCkeroch.despawn();
         }
@@ -121,7 +120,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCstela == null) {
-            HistoriaMapMeelv3.NPCstela = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Stezinha");
+            HistoriaMapMeelv3.NPCstela = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.STELA);
         } else {
             HistoriaMapMeelv3.NPCstela.despawn();
         }
@@ -130,7 +129,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCdiego == null) {
-            HistoriaMapMeelv3.NPCdiego = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "DiegoSVP");
+            HistoriaMapMeelv3.NPCdiego = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.DIEGO);
         } else {
             HistoriaMapMeelv3.NPCdiego.despawn();
         }
@@ -139,7 +138,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCraymeki == null) {
-            HistoriaMapMeelv3.NPCraymeki = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Raymeki");
+            HistoriaMapMeelv3.NPCraymeki = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.RAYMEKI);
         } else {
             HistoriaMapMeelv3.NPCraymeki.despawn();
         }
@@ -148,7 +147,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCmariaum == null) {
-            HistoriaMapMeelv3.NPCmariaum = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Mariaum");
+            HistoriaMapMeelv3.NPCmariaum = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.MARIAUM);
         } else {
             HistoriaMapMeelv3.NPCmariaum.despawn();
         }
@@ -157,7 +156,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCsombra == null) {
-            HistoriaMapMeelv3.NPCsombra = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "SombraXD");
+            HistoriaMapMeelv3.NPCsombra = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.SOMBRA);
         } else {
             HistoriaMapMeelv3.NPCsombra.despawn();
         }
@@ -166,7 +165,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCroberta == null) {
-            HistoriaMapMeelv3.NPCroberta = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "RobertaCoelho");
+            HistoriaMapMeelv3.NPCroberta = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.ROBERTA);
         } else {
             HistoriaMapMeelv3.NPCroberta.despawn();
         }
@@ -175,7 +174,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCbase62 == null) {
-            HistoriaMapMeelv3.NPCbase62 = Utils.createNPC(EntityType.PLAYER, "Base62", HistoriaMapMeelv3.meio.clone().add(number, 0, -3), "Vinheta");
+            HistoriaMapMeelv3.NPCbase62 = Utils.createNPC(EntityType.PLAYER, TeatroSkins.BASE62_NOME, HistoriaMapMeelv3.meio.clone().add(number, 0, -3), TeatroSkins.BASE62_SKIN);
         } else {
             HistoriaMapMeelv3.NPCbase62.despawn();
             HistoriaMapMeelv3.NPCbase62.spawn(HistoriaMapMeelv3.meio.clone().add(number, 0, -3));
@@ -184,7 +183,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCbase64 == null) {
-            HistoriaMapMeelv3.NPCbase64 = Utils.createNPC(EntityType.PLAYER, "Base64", HistoriaMapMeelv3.meio.clone().add(number, 0, -3), "Intro_GamerHD");
+            HistoriaMapMeelv3.NPCbase64 = Utils.createNPC(EntityType.PLAYER, TeatroSkins.BASE64_NOME, HistoriaMapMeelv3.meio.clone().add(number, 0, -3), TeatroSkins.BASE64_SKIN);
         } else {
             HistoriaMapMeelv3.NPCbase64.despawn();
             HistoriaMapMeelv3.NPCbase64.spawn(HistoriaMapMeelv3.meio.clone().add(number, 0, -3));
@@ -193,7 +192,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCbase65 == null) {
-            HistoriaMapMeelv3.NPCbase65 = Utils.createNPC(EntityType.PLAYER, "Base65", HistoriaMapMeelv3.meio.clone().add(number, 0, -3), "IntroCDC");
+            HistoriaMapMeelv3.NPCbase65 = Utils.createNPC(EntityType.PLAYER, TeatroSkins.BASE65_NOME, HistoriaMapMeelv3.meio.clone().add(number, 0, -3), TeatroSkins.BASE65_SKIN);
         } else {
             HistoriaMapMeelv3.NPCbase65.despawn();
             HistoriaMapMeelv3.NPCbase65.spawn(HistoriaMapMeelv3.meio.clone().add(number, 0, -3));
@@ -202,7 +201,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCmatheus == null) {
-            HistoriaMapMeelv3.NPCmatheus = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Matheus");
+            HistoriaMapMeelv3.NPCmatheus = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.MATHEUS);
         } else {
             HistoriaMapMeelv3.NPCmatheus.despawn();
         }
@@ -211,7 +210,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCsnif == null) {
-            HistoriaMapMeelv3.NPCsnif = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "SnifPvP");
+            HistoriaMapMeelv3.NPCsnif = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.SNIF);
         } else {
             HistoriaMapMeelv3.NPCsnif.despawn();
         }
@@ -220,7 +219,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCsomeera == null) {
-            HistoriaMapMeelv3.NPCsomeera = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Someera");
+            HistoriaMapMeelv3.NPCsomeera = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.SOMEERA);
         } else {
             HistoriaMapMeelv3.NPCsomeera.despawn();
         }
@@ -229,7 +228,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCbudokkan == null) {
-            HistoriaMapMeelv3.NPCbudokkan = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Budokkan");
+            HistoriaMapMeelv3.NPCbudokkan = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.BUDOKKAN);
         } else {
             HistoriaMapMeelv3.NPCbudokkan.despawn();
         }
@@ -238,7 +237,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCdeb == null) {
-            HistoriaMapMeelv3.NPCdeb = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Debb_");
+            HistoriaMapMeelv3.NPCdeb = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.DEB);
         } else {
             HistoriaMapMeelv3.NPCdeb.despawn();
         }
@@ -247,7 +246,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCultra == null) {
-            HistoriaMapMeelv3.NPCultra = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "yUltra_");
+            HistoriaMapMeelv3.NPCultra = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.ULTRA);
         } else {
             HistoriaMapMeelv3.NPCultra.despawn();
         }
@@ -256,7 +255,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCskatista == null) {
-            HistoriaMapMeelv3.NPCskatista = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Skatista_PvP");
+            HistoriaMapMeelv3.NPCskatista = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.SKATISTA);
         } else {
             HistoriaMapMeelv3.NPCskatista.despawn();
         }
@@ -265,7 +264,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCmordecai == null) {
-            HistoriaMapMeelv3.NPCmordecai = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "yMordecai");
+            HistoriaMapMeelv3.NPCmordecai = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.MORDECAI);
         } else {
             HistoriaMapMeelv3.NPCmordecai.despawn();
         }
@@ -274,7 +273,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCjorbe == null) {
-            HistoriaMapMeelv3.NPCjorbe = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Jorbee1234");
+            HistoriaMapMeelv3.NPCjorbe = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.JORBE);
         } else {
             HistoriaMapMeelv3.NPCjorbe.despawn();
         }
@@ -283,7 +282,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCilari == null) {
-            HistoriaMapMeelv3.NPCilari = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "iiLari");
+            HistoriaMapMeelv3.NPCilari = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.ILARI);
         } else {
             HistoriaMapMeelv3.NPCilari.despawn();
         }
@@ -292,7 +291,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCtia == null) {
-            HistoriaMapMeelv3.NPCtia = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "TiaChavi");
+            HistoriaMapMeelv3.NPCtia = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.TIA);
         } else {
             HistoriaMapMeelv3.NPCtia.despawn();
         }
@@ -301,7 +300,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCtio == null) {
-            HistoriaMapMeelv3.NPCtio = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "LendariaSarrada");
+            HistoriaMapMeelv3.NPCtio = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.TIO);
         } else {
             HistoriaMapMeelv3.NPCtio.despawn();
         }
@@ -310,7 +309,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPClogan == null) {
-            HistoriaMapMeelv3.NPClogan = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Loogan_");
+            HistoriaMapMeelv3.NPClogan = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.LOGAN);
         } else {
             HistoriaMapMeelv3.NPClogan.despawn();
         }
@@ -319,7 +318,7 @@ public class HistoriaMapMeelv3 {
         number++;
 
         if (HistoriaMapMeelv3.NPCsaulinh == null) {
-            HistoriaMapMeelv3.NPCsaulinh = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Zaulo");
+            HistoriaMapMeelv3.NPCsaulinh = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.SAULINH);
         } else {
             HistoriaMapMeelv3.NPCsaulinh.despawn();
         }
@@ -379,152 +378,152 @@ public class HistoriaMapMeelv3 {
         int number = -13;
         number++;
         if (HistoriaMapMeelv3.NPCintro == null) {
-            HistoriaMapMeelv3.NPCintro = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Introo");
+            HistoriaMapMeelv3.NPCintro = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.INTRO);
         } else {
             HistoriaMapMeelv3.NPCintro.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCmeel == null) {
-            HistoriaMapMeelv3.NPCmeel = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "iMeel");
+            HistoriaMapMeelv3.NPCmeel = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.MEEL);
         } else {
             HistoriaMapMeelv3.NPCmeel.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCbiidu == null) {
-            HistoriaMapMeelv3.NPCbiidu = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Biidu");
+            HistoriaMapMeelv3.NPCbiidu = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.BIIDU);
         } else {
             HistoriaMapMeelv3.NPCbiidu.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCkeroch == null) {
-            HistoriaMapMeelv3.NPCkeroch = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "iKeroch");
+            HistoriaMapMeelv3.NPCkeroch = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.KEROCH);
         } else {
             HistoriaMapMeelv3.NPCkeroch.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCstela == null) {
-            HistoriaMapMeelv3.NPCstela = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Stezinha");
+            HistoriaMapMeelv3.NPCstela = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.STELA);
         } else {
             HistoriaMapMeelv3.NPCstela.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCdiego == null) {
-            HistoriaMapMeelv3.NPCdiego = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "DiegoSVP");
+            HistoriaMapMeelv3.NPCdiego = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.DIEGO);
         } else {
             HistoriaMapMeelv3.NPCdiego.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCraymeki == null) {
-            HistoriaMapMeelv3.NPCraymeki = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Raymeki");
+            HistoriaMapMeelv3.NPCraymeki = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.RAYMEKI);
         } else {
             HistoriaMapMeelv3.NPCraymeki.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCmariaum == null) {
-            HistoriaMapMeelv3.NPCmariaum = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Mariaum");
+            HistoriaMapMeelv3.NPCmariaum = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.MARIAUM);
         } else {
             HistoriaMapMeelv3.NPCmariaum.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCsombra == null) {
-            HistoriaMapMeelv3.NPCsombra = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "SombraXD");
+            HistoriaMapMeelv3.NPCsombra = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.SOMBRA);
         } else {
             HistoriaMapMeelv3.NPCsombra.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCroberta == null) {
-            HistoriaMapMeelv3.NPCroberta = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "RobertaCoelho");
+            HistoriaMapMeelv3.NPCroberta = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.ROBERTA);
         } else {
             HistoriaMapMeelv3.NPCroberta.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCbase62 == null) {
-            HistoriaMapMeelv3.NPCbase62 = Utils.createNPC(EntityType.PLAYER, "Base62", HistoriaMapMeelv3.meio.clone().add(number, 0, -3), "Vinheta");
+            HistoriaMapMeelv3.NPCbase62 = Utils.createNPC(EntityType.PLAYER, TeatroSkins.BASE62_NOME, HistoriaMapMeelv3.meio.clone().add(number, 0, -3), TeatroSkins.BASE62_SKIN);
             HistoriaMapMeelv3.NPCbase62.despawn();
         } else {
             HistoriaMapMeelv3.NPCbase62.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCbase64 == null) {
-            HistoriaMapMeelv3.NPCbase64 = Utils.createNPC(EntityType.PLAYER, "Base64", HistoriaMapMeelv3.meio.clone().add(number, 0, -3), "Intro_GamerHD");
+            HistoriaMapMeelv3.NPCbase64 = Utils.createNPC(EntityType.PLAYER, TeatroSkins.BASE64_NOME, HistoriaMapMeelv3.meio.clone().add(number, 0, -3), TeatroSkins.BASE64_SKIN);
             HistoriaMapMeelv3.NPCbase64.despawn();
         } else {
             HistoriaMapMeelv3.NPCbase64.despawn();
         }
         number++;
         if (HistoriaMapMeelv3.NPCbase65 == null) {
-            HistoriaMapMeelv3.NPCbase65 = Utils.createNPC(EntityType.PLAYER, "Base65", HistoriaMapMeelv3.meio.clone().add(number, 0, -3), "IntroCDC");
+            HistoriaMapMeelv3.NPCbase65 = Utils.createNPC(EntityType.PLAYER, TeatroSkins.BASE65_NOME, HistoriaMapMeelv3.meio.clone().add(number, 0, -3), TeatroSkins.BASE65_SKIN);
             HistoriaMapMeelv3.NPCbase65.despawn();
         } else {
             HistoriaMapMeelv3.NPCbase65.despawn();
         }
         if (HistoriaMapMeelv3.NPCmatheus == null) {
-            HistoriaMapMeelv3.NPCmatheus = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Matheus");
+            HistoriaMapMeelv3.NPCmatheus = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.MATHEUS);
         } else {
             HistoriaMapMeelv3.NPCmatheus.despawn();
         }
         if (HistoriaMapMeelv3.NPCsnif == null) {
-            HistoriaMapMeelv3.NPCsnif = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "SnifPvP");
+            HistoriaMapMeelv3.NPCsnif = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.SNIF);
         } else {
             HistoriaMapMeelv3.NPCsnif.despawn();
         }
         if (HistoriaMapMeelv3.NPCsomeera == null) {
-            HistoriaMapMeelv3.NPCsomeera = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Someera");
+            HistoriaMapMeelv3.NPCsomeera = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.SOMEERA);
         } else {
             HistoriaMapMeelv3.NPCsomeera.despawn();
         }
         if (HistoriaMapMeelv3.NPCbudokkan == null) {
-            HistoriaMapMeelv3.NPCbudokkan = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Budokkan");
+            HistoriaMapMeelv3.NPCbudokkan = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.BUDOKKAN);
         } else {
             HistoriaMapMeelv3.NPCbudokkan.despawn();
         }
         if (HistoriaMapMeelv3.NPCdeb == null) {
-            HistoriaMapMeelv3.NPCdeb = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Debb_");
+            HistoriaMapMeelv3.NPCdeb = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.DEB);
         } else {
             HistoriaMapMeelv3.NPCdeb.despawn();
         }
         if (HistoriaMapMeelv3.NPCultra == null) {
-            HistoriaMapMeelv3.NPCultra = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "yUltra_");
+            HistoriaMapMeelv3.NPCultra = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.ULTRA);
         } else {
             HistoriaMapMeelv3.NPCultra.despawn();
         }
         if (HistoriaMapMeelv3.NPCskatista == null) {
-            HistoriaMapMeelv3.NPCskatista = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Skatista_PvP");
+            HistoriaMapMeelv3.NPCskatista = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.SKATISTA);
         } else {
             HistoriaMapMeelv3.NPCskatista.despawn();
         }
         if (HistoriaMapMeelv3.NPCmordecai == null) {
-            HistoriaMapMeelv3.NPCmordecai = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "yMordecai");
+            HistoriaMapMeelv3.NPCmordecai = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.MORDECAI);
         } else {
             HistoriaMapMeelv3.NPCmordecai.despawn();
         }
         if (HistoriaMapMeelv3.NPCjorbe == null) {
-            HistoriaMapMeelv3.NPCjorbe = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Jorbee1234");
+            HistoriaMapMeelv3.NPCjorbe = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.JORBE);
         } else {
             HistoriaMapMeelv3.NPCjorbe.despawn();
         }
         if (HistoriaMapMeelv3.NPCilari == null) {
-            HistoriaMapMeelv3.NPCilari = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "iiLari");
+            HistoriaMapMeelv3.NPCilari = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.ILARI);
         } else {
             HistoriaMapMeelv3.NPCilari.despawn();
         }
         if (HistoriaMapMeelv3.NPCtia == null) {
-            HistoriaMapMeelv3.NPCtia = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "TiaChavi");
+            HistoriaMapMeelv3.NPCtia = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.TIA);
         } else {
             HistoriaMapMeelv3.NPCtia.despawn();
         }
         if (HistoriaMapMeelv3.NPCtio == null) {
-            HistoriaMapMeelv3.NPCtio = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "LendariaSarrada");
+            HistoriaMapMeelv3.NPCtio = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.TIO);
         } else {
             HistoriaMapMeelv3.NPCtio.despawn();
         }
         if (HistoriaMapMeelv3.NPClogan == null) {
-            HistoriaMapMeelv3.NPClogan = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Loogan_");
+            HistoriaMapMeelv3.NPClogan = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.LOGAN);
         } else {
             HistoriaMapMeelv3.NPClogan.despawn();
         }
         if (HistoriaMapMeelv3.NPCsaulinh == null) {
-            HistoriaMapMeelv3.NPCsaulinh = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Zaulo");
+            HistoriaMapMeelv3.NPCsaulinh = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, TeatroSkins.SAULINH);
         } else {
             HistoriaMapMeelv3.NPCsaulinh.despawn();
         }
